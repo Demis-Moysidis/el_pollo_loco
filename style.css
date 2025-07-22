@@ -1,9 +1,34 @@
+@font-face {
+    font-family: 'Zabars';
+    src: url('./fonts/zabars/Zabars.ttf');
+}
+
 body {
+    font-family: 'Zabars';
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0;
+}
+
+h1 {
+    font-size: 54px;
+    letter-spacing: 3px;
 }
 
 canvas {
     background-color: black;
+    
+}
+
+@media (max-width: 720px) {
+    canvas {
+        width: 100%;
+    }
+}
+
+@media (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
 }
