@@ -6,10 +6,11 @@ class MovableObject extends DrawableObject {
     acceleration = 1;
     touchesTheGround;
     energy = 100;
+    currentImage = 0;
 
 
     applyGravity() {
-        setInterval( () => {
+        setStoppableInterval( () => {
             if(this.isAboveGround() || this.speedY < 0){
                 if(this.y + this.speedY > this.touchesTheGround){
                     this.y = this.touchesTheGround;
@@ -26,9 +27,6 @@ class MovableObject extends DrawableObject {
     isAboveGround() {
         return this.y < this.touchesTheGround;
     }
-
-
-
 
     moveRight(){
         this.x += this.speed;

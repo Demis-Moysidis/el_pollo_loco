@@ -30,7 +30,7 @@ class Endboss extends CollidableObject {
     }
 
     animate() {
-        setInterval( () => {
+        setStoppableInterval( () => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 200)
 

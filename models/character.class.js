@@ -59,7 +59,7 @@ class Character extends CollidableObject {
 
     animate() {
 
-        setInterval( () => {
+        setStoppableInterval( () => {
 
             if(this.world.keyboard.LEFT && this.x > -100){
                 this.moveLeft();
@@ -79,7 +79,7 @@ class Character extends CollidableObject {
 
         }, 1000 / 60);
 
-        setInterval(() => {
+        setStoppableInterval(() => {
 
             if(this.isDead()){
                 this.playAnimation(this.IMAGES_DEAD);
