@@ -26,7 +26,11 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if(this instanceof Character || this instanceof Chicken || this instanceof Endboss){
+        if(this instanceof Character || 
+           this instanceof ChickenNormal || 
+           this instanceof Endboss || 
+           this instanceof ChickenSmall)
+        {
             this.drawBlueBorder(ctx);
             this.drawRedBorder(ctx);
         }

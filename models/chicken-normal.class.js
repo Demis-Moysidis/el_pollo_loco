@@ -1,8 +1,8 @@
-class Chicken extends CollidableObject {
+class ChickenNormal extends CollidableObject {
     
-    y = 330;
-    height = 100;
-    width = 100;
+    y = 355;
+    height = 75;
+    width = 75;
     IMAGES_WALKING = ['./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
                       './img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
                       './img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
@@ -15,11 +15,11 @@ class Chicken extends CollidableObject {
         right: 10
     }
 
-    constructor() {
+    constructor(startRangeX) {
         super().loadImage('./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
 
-        this.x = 200 + Math.random() * 500;
+        this.x = startRangeX + Math.random() * 300;
         this.speed = 0.15 + Math.random() * 0.25
   
         this.animate();

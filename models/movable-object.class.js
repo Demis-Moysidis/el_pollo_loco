@@ -40,13 +40,22 @@ class MovableObject extends DrawableObject {
     }
 
     jump() {
-        this.speedY = -15;
+        this.currentImage = 0;
+        this.speedY = -12.5;
     }
 
-    playAnimation(images) {
+    playAnimation(images, loop=true) {
+        
         let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
+
+        if(!loop && this.currentImage >= images.length){
+    
+            let path = images[images.length - 1];
+            this.img = this.imageCache[path];
+             
+        }
     }
 }
