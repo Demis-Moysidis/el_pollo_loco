@@ -15,7 +15,7 @@ class BackgroundObject extends MovableObject {
 
     animate(){
         setStoppableInterval(() => {
-            if(this.world){
+            if(this.world && !this.world.character.deathRegistered){
                 if(this.world.keyboard.RIGHT && this.layer == 3 && this.world.character.x < this.world.level.level_end_x){        
                     this.moveRightLayerTree()     
                 }else if(this.world.keyboard.LEFT && this.layer == 3 && this.world.character.x > this.world.level.level_start_x){
@@ -26,7 +26,6 @@ class BackgroundObject extends MovableObject {
                     this.moveLeftLayerTwo();
                 }
             }
-
         }, 1000 / 50 )
     }
 

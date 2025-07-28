@@ -41,9 +41,8 @@ class ChickenSmall extends CollidableObject {
 
         setStoppableInterval(() => {
             this.jump();
-            console.log('JUMP');
+            console.log('CHICKEN JUMP');
             
-
         }, this.getTimeForJumpAnimation() )
     }
 
