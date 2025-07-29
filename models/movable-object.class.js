@@ -30,17 +30,14 @@ class MovableObject extends DrawableObject {
 
     moveRight(){
         this.x += this.speed;
-         
     }
 
     moveLeft() {
-        
         this.x -= this.speed;
-        
     }
 
-    jump(power) {
-        this.currentImage = 0;
+    jump(power, currentImage = 0) {
+        this.currentImage = currentImage;
         this.speedY = power;
     }
 
