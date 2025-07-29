@@ -5,7 +5,7 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 1;
     touchesTheGround;
-    energy = 100;
+    
     currentImage = 0;
 
 
@@ -39,9 +39,9 @@ class MovableObject extends DrawableObject {
         
     }
 
-    jump() {
+    jump(power) {
         this.currentImage = 0;
-        this.speedY = -12.5;
+        this.speedY = power;
     }
 
     playAnimation(images, loop=true) {

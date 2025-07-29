@@ -7,6 +7,9 @@ class ChickenSmall extends CollidableObject {
                       'img/3_enemies_chicken/chicken_small/1_walk/2_w.png',
                       'img/3_enemies_chicken/chicken_small/1_walk/3_w.png'
     ];
+    IMAGES_DEAD =[
+        'img/3_enemies_chicken/chicken_small/2_dead/dead.png'
+    ]
 
     offset = {
         top: 10,
@@ -16,34 +19,47 @@ class ChickenSmall extends CollidableObject {
     }
 
     touchesTheGround = 378;
+    
 
     constructor(startRangeX) {
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_DEAD);
 
         this.x = startRangeX + Math.random() * 300;
         this.speed = 0.15 + Math.random() * 0.25
   
         this.applyGravity();
         this.animate();
-        
+        this.setLastY();
     }
 
     animate() {
         setStoppableInterval(() => {
-            this.moveLeft();
+            if(!this.isDead()){
+                this.moveLeft();
+            }
+            
         }, 1000 / 60);
 
-
         setStoppableInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
-        }, 200) 
-
-        setStoppableInterval(() => {
-            this.jump();
-            console.log('CHICKEN JUMP');
+            if(!this.isDead()){
+                this.jump(-8);
+            }
             
         }, this.getTimeForJumpAnimation() )
+
+
+        setStoppableInterval(() => {
+            if(!this.isDead()){
+                this.playAnimation(this.IMAGES_WALKING);
+            }else{
+                this.playAnimation(this.IMAGES_DEAD);
+            }
+            
+        }, 150) 
+
+
     }
 
     getTimeForJumpAnimation(){

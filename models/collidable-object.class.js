@@ -7,6 +7,9 @@ class CollidableObject extends MovableObject {
     }
 
     lastHit = 0;
+    energy = 100;
+    lastY = this.y;
+    lastHitTimeStamp = new Date().getTime();
 
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
@@ -15,13 +18,20 @@ class CollidableObject extends MovableObject {
                this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom    
     }
 
-    hit(){
-        this.energy -= 5;
-        if(this.energy < 0){
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
+    hit(damage){
+        if(this.hitTimeStamp()){
+
+            this.energy -= damage;
+            if(this.energy < 0){
+                this.energy = 0;
+            } else {
+                this.lastHit = new Date().getTime();
+            }
+
+            this.lastHitTimeStamp = new Date().getTime();
         }
+
+
     }
 
     isHurt() {
@@ -32,6 +42,16 @@ class CollidableObject extends MovableObject {
 
     isDead() {
         return this.energy == 0;
+    }
+
+    setLastY(){
+        setStoppableInterval(() => {
+            this.lastY = this.y;
+        }, 100)
+    }
+    
+    hitTimeStamp(){
+        return new Date().getTime() - this.lastHitTimeStamp > 1000 
     }
 
     

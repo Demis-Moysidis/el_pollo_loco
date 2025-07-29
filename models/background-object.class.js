@@ -16,13 +16,13 @@ class BackgroundObject extends MovableObject {
     animate(){
         setStoppableInterval(() => {
             if(this.world && !this.world.character.deathRegistered){
-                if(this.world.keyboard.RIGHT && this.layer == 3 && this.world.character.x < this.world.level.level_end_x){        
+                if(this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && this.layer == 3 && this.world.character.x < this.world.level.level_end_x){        
                     this.moveRightLayerTree()     
-                }else if(this.world.keyboard.LEFT && this.layer == 3 && this.world.character.x > this.world.level.level_start_x){
+                }else if(this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && this.layer == 3 && this.world.character.x > this.world.level.level_start_x){
                     this.moveLeftLayerTree() 
-                }else if(this.world.keyboard.RIGHT && this.layer == 2 && this.world.character.x < this.world.level.level_end_x){
+                }else if(this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && this.layer == 2 && this.world.character.x < this.world.level.level_end_x){
                     this.moveRightLayerTwo();   
-                }else if(this.world.keyboard.LEFT && this.layer == 2 && this.world.character.x > this.world.level.level_start_x){
+                }else if(this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && this.layer == 2 && this.world.character.x > this.world.level.level_start_x){
                     this.moveLeftLayerTwo();
                 }
             }

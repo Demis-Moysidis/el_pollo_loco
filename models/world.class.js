@@ -7,7 +7,8 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
-    throwableObjects = []
+    throwableObjects = [];
+    
     
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -27,9 +28,14 @@ class World {
 
     run() {
         setStoppableInterval( () => {
-            this.checkCollisions();
+           
             this.checkThrowObjects();
         }, 200)
+
+        setStoppableInterval( () => {
+            this.checkCollisions();
+           
+        }, 1000 / 60)
     }
 
     checkThrowObjects() {
@@ -43,11 +49,28 @@ class World {
         this.level.enemies.forEach( (enemy) => {
             if(this.character.isColliding(enemy)){
                 
-                this.character.hit();
-                this.statusBar.setPercentage(this.character.energy);
-                console.log('Collision', this.character.energy);
+                
+                if(this.checkIfCollisionWasJumpAttackFromCharacter(enemy) && this.character.isAboveGround() && !this.character.isDead()){
+                    enemy.hit(100);
+                    
+                    
+                }else{
+                    if(!enemy.isDead()){
+                        
+                        this.character.hit(20);
+                        
+                        this.statusBar.setPercentage(this.character.energy);  
+                        
+                    }
+                }
             };
         })
+    }
+
+
+
+    checkIfCollisionWasJumpAttackFromCharacter(enemy){
+        return enemy.lastY + enemy.offset.top > this.character.lastY + this.character.height - this.character.offset.bottom
     }
 
     draw() {
@@ -89,6 +112,7 @@ class World {
         
         movableObject.draw(this.ctx);
 
+        // DrawFrame
         movableObject.drawFrame(this.ctx);
 
         

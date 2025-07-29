@@ -1,8 +1,10 @@
 class Character extends CollidableObject {
 
+    x = 120;
+    y = -50;
     height = 280;
     width = 140;
-    y = -60;
+    
     IMAGES_WALKING = [
         './img/2_character_pepe/2_walk/W-21.png',
         './img/2_character_pepe/2_walk/W-22.png',
@@ -86,6 +88,7 @@ class Character extends CollidableObject {
         this.loadImages(this.IMAGES_IDLE_LONG);
         this.applyGravity();
         this.animate();
+        this.setLastY();
     }
 
     animate() {
@@ -93,21 +96,24 @@ class Character extends CollidableObject {
         setStoppableInterval(() => {
             if(!this.deathRegistered){
                 if(this.world.keyboard.LEFT && this.x > this.world.level.level_start_x){
+                   
                     this.moveLeft();
                     this.otherDirection = true;
 
-                    this.timeStampForIdle = new Date().getTime();
+                    this.setTimeStampForIdle();
                 }
                 if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){
+                    
                     this.moveRight();
                     this.otherDirection = false;
 
-                    this.timeStampForIdle = new Date().getTime();
+                    this.setTimeStampForIdle();
                 }
                 if(this.world.keyboard.SPACE && !this.isAboveGround()) {
-                    this.jump();
+                    
+                    this.jump(-12.5);
 
-                    this.timeStampForIdle = new Date().getTime();
+                    this.setTimeStampForIdle();
                 }
                 this.world.camera_x = -this.x + 100;
             }
@@ -133,6 +139,12 @@ class Character extends CollidableObject {
         },  140); 
     }
 
+
+
+    setTimeStampForIdle(){
+        this.timeStampForIdle = new Date().getTime();
+    }
+
     checkIfTimeStampForLongIdle(){
         return new Date().getTime() - this.timeStampForIdle > 5000;
     }
@@ -140,7 +152,7 @@ class Character extends CollidableObject {
     playDeadAnimation(){
         this.playAnimation(this.IMAGES_DEAD, false);
         if(!this.deathRegistered){
-            this.jump();
+            this.jump(-12.5);
             this.touchesTheGround = 500;
             this.deathRegistered = true;
         }
