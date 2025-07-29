@@ -115,6 +115,11 @@ class Character extends CollidableObject {
 
                     this.setTimeStampForIdle();
                 }
+
+                if(this.world.keyboard.D){
+                    this.setTimeStampForIdle();
+                }
+
                 this.world.camera_x = -this.x + 100;
             }
 

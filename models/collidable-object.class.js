@@ -47,7 +47,7 @@ class CollidableObject extends MovableObject {
     setLastY(){
         setStoppableInterval(() => {
             this.lastY = this.y;
-        }, 100)
+        }, 300)
     }
     
     hitTimeStamp(){
