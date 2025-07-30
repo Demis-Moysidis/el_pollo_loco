@@ -1,7 +1,7 @@
 class Character extends CollidableObject {
 
     x = 120;
-    y = -50;
+    y = 50;
     height = 280;
     width = 140;
     
@@ -66,6 +66,9 @@ class Character extends CollidableObject {
 
     world;
     speed = 5;
+    speedHit = 0.3;
+    currentImage = 2;
+
     touchesTheGround = 155;
     timeStampForIdle = new Date().getTime();
 
@@ -77,7 +80,7 @@ class Character extends CollidableObject {
     }
 
     constructor() {
-        super().loadImage('./img/2_character_pepe/2_walk/W-21.png');
+        super().loadImage('img/2_character_pepe/3_jump/J-35.png');
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
@@ -93,20 +96,22 @@ class Character extends CollidableObject {
 
         setStoppableInterval(() => {
             if(!this.deathRegistered){
-                if(this.world.keyboard.LEFT && this.x > this.world.level.level_start_x){
+                if(this.isAttackedByEndboss()){
+                    this.moveLeft();
+                }else if(this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && this.x > this.world.level.level_start_x){
                    
                     this.moveLeft();
                     this.otherDirection = true;
 
                     this.setTimeStampForIdle();
-                }
-                if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){
+                }else if(this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && this.x < this.world.level.level_end_x){
                     
                     this.moveRight();
                     this.otherDirection = false;
 
                     this.setTimeStampForIdle();
                 }
+
                 if(this.world.keyboard.SPACE && !this.isAboveGround()) {
                     
                     this.jump(-12.5);
@@ -118,6 +123,12 @@ class Character extends CollidableObject {
                     this.setTimeStampForIdle();
                 }
 
+                if(!this.isAboveGround()){
+                    this.landedAfterHitByEndboss()
+                }       
+                
+        
+
                 this.world.camera_x = -this.x + 100;
             }
 
@@ -127,6 +138,7 @@ class Character extends CollidableObject {
             if(this.isDead()){
                 this.playDeadAnimation();
             }else if(this.isHurt()){
+                this.setTimeStampForIdle()
                 this.playAnimation(this.IMAGES_HURT);
             }else if(this.isAboveGround()) {     
                 this.playAnimation(this.IMAGES_JUMPING, false);
@@ -149,6 +161,5 @@ class Character extends CollidableObject {
     checkIfTimeStampForLongIdle(){
         return new Date().getTime() - this.timeStampForIdle > 5000;
     }
-
 
 }

@@ -12,6 +12,7 @@ class CollidableObject extends MovableObject {
     lastHitTimeStamp = new Date().getTime();
 
     deathRegistered = false;
+    attackedbyEndboss = false;
 
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
@@ -32,7 +33,6 @@ class CollidableObject extends MovableObject {
 
             this.lastHitTimeStamp = new Date().getTime();
         }
-
 
     }
 
@@ -59,13 +59,28 @@ class CollidableObject extends MovableObject {
     playDeadAnimation(){
         if(!this.deathRegistered){
             this.jump(-12.5);
-            this.touchesTheGround = 500;
+            this.touchesTheGround = 1000;
             this.currentImage = 0;
             this.deathRegistered = true;
         }
         this.playAnimation(this.IMAGES_DEAD, false);
     }
 
-    
+    hitByEndboss(){
+        this.jump(-7);
+        this.attackedbyEndboss = true;
+    }
+
+    landedAfterHitByEndboss(){
+        
+        this.attackedbyEndboss = false;
+        
+    }
+
+    isAttackedByEndboss(){
+        return this.attackedbyEndboss
+    }
+
+
 
 }

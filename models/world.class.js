@@ -10,6 +10,7 @@ class World {
     throwableObjects = [];
     lastThrowableObject = 0;
     
+    checkIfEndbossWasTriggered = false;
     
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -30,8 +31,21 @@ class World {
     run() {
         setStoppableInterval( () => {
             this.checkThrowObjects();
-            this.checkCollisions();  
+            this.checkCollisions();
+            this.checkStartBattleAgainstEndboss();
         }, 1000 / 60)
+    }
+
+    checkStartBattleAgainstEndboss(){
+        this.level.enemies.forEach((enemy) => {
+            if(enemy instanceof Endboss){
+                if(this.character.x > (enemy.x - 700) && !this.checkIfEndbossWasTriggered){
+                    enemy.animate();
+                    enemy.applyGravity();
+                    this.checkIfEndbossWasTriggered = true;    
+                } 
+            }
+        })
     }
 
     checkThrowObjects() {
@@ -55,12 +69,13 @@ class World {
             if(this.character.isColliding(enemy)){
                 if(this.checkIfCollisionWasJumpAttackFromCharacter(enemy) && this.character.isAboveGround() && !this.character.isDead() && !enemy.isDead()){
                     enemy.hit(100);
-                    
                     this.character.jump(-5, 2);
-
                 }else{
-                    if(!enemy.isDead()){
+                    if(!enemy.isDead() && !this.character.isDead()){
                         this.character.hit(20);
+                        if(enemy instanceof Endboss){
+                            this.character.hitByEndboss();
+                        }
                         this.statusBar.setPercentage(this.character.energy);
                     }
                 }

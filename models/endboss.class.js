@@ -24,14 +24,14 @@ class Endboss extends CollidableObject {
     ];
 
     IMAGES_ATTACK = [
-        'img/4_enemie_boss_chicken/3_attack/G13.png',
-        'img/4_enemie_boss_chicken/3_attack/G14.png',
-        'img/4_enemie_boss_chicken/3_attack/G15.png',
-        'img/4_enemie_boss_chicken/3_attack/G16.png',
+        // 'img/4_enemie_boss_chicken/3_attack/G13.png',
+        // 'img/4_enemie_boss_chicken/3_attack/G14.png',
+        // 'img/4_enemie_boss_chicken/3_attack/G15.png',
+        // 'img/4_enemie_boss_chicken/3_attack/G16.png',
         'img/4_enemie_boss_chicken/3_attack/G17.png',
         'img/4_enemie_boss_chicken/3_attack/G18.png',
-        'img/4_enemie_boss_chicken/3_attack/G19.png',
-        'img/4_enemie_boss_chicken/3_attack/G20.png',
+        // 'img/4_enemie_boss_chicken/3_attack/G19.png',
+        // 'img/4_enemie_boss_chicken/3_attack/G20.png',
     ];
 
     IMAGES_HURT = [
@@ -53,19 +53,26 @@ class Endboss extends CollidableObject {
         right: 30
     }
 
+    endbossWalkTimeStamp = 0;
+    
+    jumpSpeed = 3;
+    walkSpeed = 0.5;
+    speed = 0.5;
+    currentImage = 1;
+
     
 
     constructor() {
-        super().loadImage('img/4_enemie_boss_chicken/2_alert/G5.png');
+        super().loadImage('img/4_enemie_boss_chicken/3_attack/G18.png');
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_HURT);
 
-        this.x = 300;
-        this.animate();
-        this.applyGravity();
+        this.x = 4300;
+        // this.animate();
+        // this.applyGravity();
     }
 
     animate() {
@@ -74,12 +81,53 @@ class Endboss extends CollidableObject {
                 this.playDeadAnimation()
             }else if(this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT)
-            }else{
+            }
+            
+            else if( this.isAboveGround()){
+                this.playAnimation(this.IMAGES_ATTACK, false)
+            }
+
+            else if(this.checkWalkingTime()){
+                this.playAnimation(this.IMAGES_WALKING)
+            }
+            
+            else{
                 this.playAnimation(this.IMAGES_ALERT)
             }
             
-        }, 200)
+        }, 140)
+
+
+        setStoppableInterval(() => {
+            if((this.checkWalkingTime() || this.isAboveGround()) && !this.isDead()){
+                if(this.isAboveGround()){
+                    this.speed = this.jumpSpeed;
+                }else{
+                    this.speed = this.walkSpeed;
+                }
+                this.moveLeft();
+            }
+        }, 1000 /60)
+
+        this.setWalkingIntervals();
+        this.setAttackingIntervals();
     }
 
+
+    setAttackingIntervals(){
+        setStoppableInterval( () => {
+            this.jump(-12)
+        }, 5000)
+    }
+
+    setWalkingIntervals(){
+        setStoppableInterval( () => {
+            this.endbossWalkTimeStamp = new Date().getTime();
+        }, 3000)
+    }
+
+    checkWalkingTime(){
+       return new Date().getTime() - this.endbossWalkTimeStamp < 1000
+    }
 
 }

@@ -6,7 +6,7 @@ class MovableObject extends DrawableObject {
     acceleration = 1;
     touchesTheGround;
     
-    currentImage = 0;
+    
 
 
     applyGravity() {
