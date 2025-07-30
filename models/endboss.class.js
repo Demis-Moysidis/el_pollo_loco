@@ -81,17 +81,11 @@ class Endboss extends CollidableObject {
                 this.playDeadAnimation()
             }else if(this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT)
-            }
-            
-            else if( this.isAboveGround()){
+            }else if( this.isAboveGround()){
                 this.playAnimation(this.IMAGES_ATTACK, false)
-            }
-
-            else if(this.checkWalkingTime()){
+            }else if(this.checkWalkingTime()){
                 this.playAnimation(this.IMAGES_WALKING)
-            }
-            
-            else{
+            }else{
                 this.playAnimation(this.IMAGES_ALERT)
             }
             
@@ -113,10 +107,11 @@ class Endboss extends CollidableObject {
         this.setAttackingIntervals();
     }
 
-
     setAttackingIntervals(){
         setStoppableInterval( () => {
-            this.jump(-12)
+            if(!this.isDead()){
+                this.jump(-12);
+            }
         }, 5000)
     }
 

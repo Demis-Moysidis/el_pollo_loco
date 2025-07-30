@@ -11,6 +11,7 @@ class World {
     lastThrowableObject = 0;
     
     checkIfEndbossWasTriggered = false;
+    endbossHealth = 100;
     
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -33,7 +34,20 @@ class World {
             this.checkThrowObjects();
             this.checkCollisions();
             this.checkStartBattleAgainstEndboss();
+            this.checkEndbossDead();
         }, 1000 / 60)
+    }
+
+    checkEndbossDead(){
+        this.level.enemies.forEach((enemy) => {
+            if(enemy instanceof Endboss){
+                if(enemy.energy > 0){
+                    this.endbossHealth = true;
+                }else{
+                    this.endbossHealth = false;
+                }
+            }
+        })
     }
 
     checkStartBattleAgainstEndboss(){
@@ -49,14 +63,12 @@ class World {
     }
 
     checkThrowObjects() {
-        if(this.keyboard.D && !this.character.deathRegistered){
+        if(this.keyboard.D && !this.character.deathRegistered && this.endbossHealth){
             if(this.checkLastThrowenObjectTime()){
                 let bottle = new ThrowableObject(this.character.x + 65, this.character.y + 100);
                 this.throwableObjects.push(bottle);
-
                 this.lastThrowableObject = new Date().getTime();
             }
-
         }
     }
 

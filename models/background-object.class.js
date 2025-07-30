@@ -15,7 +15,7 @@ class BackgroundObject extends MovableObject {
 
     animate(){
         setStoppableInterval(() => {
-            if(this.world && !this.world.character.deathRegistered){
+            if(this.world && !this.world.character.deathRegistered && this.world.endbossHealth){
                 if(this.world.character.isAttackedByEndboss()){   
                     if(this.layer == 3){
                         this.moveLeftLayerTree(); 

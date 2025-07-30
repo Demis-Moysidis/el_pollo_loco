@@ -95,9 +95,14 @@ class Character extends CollidableObject {
     animate() {
 
         setStoppableInterval(() => {
-            if(!this.deathRegistered){
+            if(!this.deathRegistered && this.world.endbossHealth){
                 if(this.isAttackedByEndboss()){
                     this.moveLeft();
+                    if(this.world.keyboard.LEFT){
+                        this.otherDirection = true;
+                    }else if(this.world.keyboard.RIGHT){
+                        this.otherDirection = false;
+                    }
                 }else if(this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && this.x > this.world.level.level_start_x){
                    
                     this.moveLeft();
@@ -127,8 +132,6 @@ class Character extends CollidableObject {
                     this.landedAfterHitByEndboss()
                 }       
                 
-        
-
                 this.world.camera_x = -this.x + 100;
             }
 
@@ -143,7 +146,7 @@ class Character extends CollidableObject {
             }else if(this.isAboveGround()) {     
                 this.playAnimation(this.IMAGES_JUMPING, false);
             }else{
-                if((this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) || (this.world.keyboard.LEFT && !this.world.keyboard.RIGHT)  ){
+                if(((this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) || (this.world.keyboard.LEFT && !this.world.keyboard.RIGHT)) && this.world.endbossHealth){
                     this.playAnimation(this.IMAGES_WALKING);
                 }else if(this.checkIfTimeStampForLongIdle()){
                     this.playAnimation(this.IMAGES_IDLE_LONG);
