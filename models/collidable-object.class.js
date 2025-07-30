@@ -11,6 +11,8 @@ class CollidableObject extends MovableObject {
     lastY = this.y;
     lastHitTimeStamp = new Date().getTime();
 
+    deathRegistered = false;
+
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
                this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
@@ -52,6 +54,16 @@ class CollidableObject extends MovableObject {
     
     hitTimeStamp(){
         return new Date().getTime() - this.lastHitTimeStamp > 1000 
+    }
+
+    playDeadAnimation(){
+        if(!this.deathRegistered){
+            this.jump(-12.5);
+            this.touchesTheGround = 500;
+            this.currentImage = 0;
+            this.deathRegistered = true;
+        }
+        this.playAnimation(this.IMAGES_DEAD, false);
     }
 
     

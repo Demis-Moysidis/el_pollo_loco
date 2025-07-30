@@ -76,8 +76,6 @@ class Character extends CollidableObject {
         right: 40
     }
 
-    deathRegistered = false;
-
     constructor() {
         super().loadImage('./img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -144,8 +142,6 @@ class Character extends CollidableObject {
         },  140); 
     }
 
-
-
     setTimeStampForIdle(){
         this.timeStampForIdle = new Date().getTime();
     }
@@ -154,12 +150,5 @@ class Character extends CollidableObject {
         return new Date().getTime() - this.timeStampForIdle > 5000;
     }
 
-    playDeadAnimation(){
-        this.playAnimation(this.IMAGES_DEAD, false);
-        if(!this.deathRegistered){
-            this.jump(-12.5);
-            this.touchesTheGround = 500;
-            this.deathRegistered = true;
-        }
-    }
+
 }

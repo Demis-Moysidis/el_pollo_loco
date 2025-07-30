@@ -64,12 +64,20 @@ class ThrowableObject extends CollidableObject {
         setStoppableInterval(() => {
             if(this.isAboveGround()){  
                 this.playAnimation(this.IMAGES_ROTATION);
-            }else if(this.isEqualToTheGround() && !this.bottleAlreadySplashed){
+            }else if(this.isEqualToTheGround() && !this.isBottleAlreadySplashed()){
                 this.currentImage = 0;
-                this.bottleAlreadySplashed = true;
+                this.setBottleAlreadySplashed();
             }else{
                 this.playAnimation(this.IMAGES_SPLASH, false);
             }
         }, 100)
+    }
+
+    isBottleAlreadySplashed(){
+        return this.bottleAlreadySplashed
+    }
+
+    setBottleAlreadySplashed(){
+        this.bottleAlreadySplashed = true;
     }
 }

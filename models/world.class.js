@@ -35,7 +35,7 @@ class World {
     }
 
     checkThrowObjects() {
-        if(this.keyboard.D){
+        if(this.keyboard.D && !this.character.deathRegistered){
             if(this.checkLastThrowenObjectTime()){
                 let bottle = new ThrowableObject(this.character.x + 65, this.character.y + 100);
                 this.throwableObjects.push(bottle);
@@ -67,8 +67,13 @@ class World {
             };
 
             this.throwableObjects.forEach( (bottle) => {
-                if(enemy.isColliding(bottle) && bottle.isAboveGround()){
-                    enemy.hit(100);
+                if(enemy.isColliding(bottle) && !bottle.isBottleAlreadySplashed()){
+                    if(enemy instanceof Endboss){
+                        enemy.hit(50);
+                        bottle.setBottleAlreadySplashed();
+                    }else{
+                        enemy.hit(100);
+                    }
                 }
             })
         })
