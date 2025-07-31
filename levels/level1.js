@@ -1,10 +1,16 @@
 const level1 = new Level([
         new ChickenNormal(700),
+        new ChickenNormal(1000),
         new ChickenNormal(1500),
-        new ChickenNormal(2000),
-        new ChickenSmall(800),
+        new ChickenNormal(1800),
+        new ChickenNormal(2500),
+        new ChickenNormal(3000),
+        new ChickenSmall(900),
         new ChickenSmall(1200),
+        new ChickenSmall(1700),
         new ChickenSmall(2100),
+        new ChickenSmall(2900),
+        new ChickenSmall(3300),
         
         new Endboss(),
     ],
@@ -15,6 +21,14 @@ const level1 = new Level([
         new Cloud(2, 1400),
         new Cloud(1, 1900),
         new Cloud(2, 2400),
+        new Cloud(1, 2900),
+        new Cloud(2, 3400),
+        new Cloud(1, 3900),
+        new Cloud(2, 4400),
+        new Cloud(1, 4900),
+        new Cloud(2, 5400),
+        new Cloud(1, 5900),
+        new Cloud(2, 6400),
     ],
 
     [

@@ -200,7 +200,7 @@ class World {
         movableObject.draw(this.ctx);
 
         // DrawFrame
-        movableObject.drawFrame(this.ctx);
+        // movableObject.drawFrame(this.ctx);
 
         
         if(movableObject.otherDirection){
