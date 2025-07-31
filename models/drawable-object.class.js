@@ -31,7 +31,8 @@ class DrawableObject {
            this instanceof Endboss || 
            this instanceof ChickenSmall ||
            this instanceof ThrowableObject ||
-           this instanceof Coin)
+           this instanceof Coin ||
+           this instanceof CollectableBottle)
         {
             this.drawBlueBorder(ctx);
             this.drawRedBorder(ctx);

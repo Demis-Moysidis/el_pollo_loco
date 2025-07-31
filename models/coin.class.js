@@ -1,4 +1,4 @@
-class Coin extends CollidableObject {
+class Coin extends CollectableObject {
 
     x;
     y;
@@ -17,9 +17,6 @@ class Coin extends CollidableObject {
         right: 35
     }
 
-    collected = false;
-    animationId;
-
     constructor(startX, endX){
         super();
 
@@ -36,16 +33,6 @@ class Coin extends CollidableObject {
         this.animationId = setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_COIN)
         }, 600)
-    }
-
-    collect(){
-        this.collected = true;
-        clearInterval(this.animationId);
-        this.loadImage('img/transparent_picture.png')
-    }
-
-    isCollected(){
-        return this.collected
     }
 
 }

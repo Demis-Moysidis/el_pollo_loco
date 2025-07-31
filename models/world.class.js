@@ -6,16 +6,20 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+
+    coinPercentage = 0;
+    bottlePercentage = 0;
+    thrownBottles = 0;
+
     statusBarCharacterHealth = new StatusBar(30, 0, 'character_health');
-    statusBarCharacterBottle = new StatusBar(30, 50, 'character_bottle', 40);
-    statusBarCharacterCoin = new StatusBar(30, 100, 'character_coin', 0);
+    statusBarCharacterBottle = new StatusBar(30, 50, 'character_bottle', this.bottlePercentage);
+    statusBarCharacterCoin = new StatusBar(30, 100, 'character_coin', this.coinPercentage);
     statusBarEndbossHealth = new StatusBar(460, -60, 'endboss_health')
     throwableObjects = [];
     lastThrowableObject = 0;
     
     checkIfEndbossWasTriggered = false;
     endbossHealth = 100;
-    coinPercentage = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -39,6 +43,7 @@ class World {
             this.checkCollisions();
             this.checkStartBattleAgainstEndboss();
             this.checkEndbossDead();
+            this.checkIfAllBottlesAreThrowen();
         }, 1000 / 60)
     }
 
@@ -69,12 +74,25 @@ class World {
     }
 
     checkThrowObjects() {
-        if(this.keyboard.D && !this.character.deathRegistered && this.endbossHealth){
-            if(this.checkLastThrowenObjectTime()){
-                let bottle = new ThrowableObject(this.character.x + 65, this.character.y + 100);
-                this.throwableObjects.push(bottle);
-                this.lastThrowableObject = new Date().getTime();
-            }
+        if(this.keyboard.D && !this.character.deathRegistered && this.endbossHealth && this.checkLastThrowenObjectTime() && this.bottlePercentage > 0){
+            
+            let bottle = new ThrowableObject(this.character.x + 65, this.character.y + 100);
+            this.throwableObjects.push(bottle);
+            this.lastThrowableObject = new Date().getTime();
+
+            this.bottlePercentage -= 20;
+            this.statusBarCharacterBottle.setPercentage(this.bottlePercentage);
+
+            this.thrownBottles += 1; 
+        }
+    }
+
+    checkIfAllBottlesAreThrowen(){
+        if(this.thrownBottles == 10 
+            && this.endbossHealth 
+            && this.throwableObjects.every(bottle => bottle.bottleAlreadySplashed == true))
+        {
+                stopGame();
         }
     }
 
@@ -117,6 +135,15 @@ class World {
                 this.statusBarCharacterCoin.setPercentage(this.coinPercentage)
             }
         })
+
+        this.level.collectableBottles.forEach((cb) => {
+            if(this.character.isColliding(cb) && !cb.isCollected() && this.bottlePercentage < 100){
+                cb.collect();
+                this.bottlePercentage += 20;
+                this.statusBarCharacterBottle.setPercentage(this.bottlePercentage);
+            }
+        })
+
         })
     }
 
@@ -134,11 +161,13 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.collectableBottles);
 
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBarCharacterHealth);
         this.addToMap(this.statusBarCharacterBottle);
         this.addToMap(this.statusBarCharacterCoin);
+        
 
         this.addToMap(this.statusBarEndbossHealth);
         this.ctx.translate(this.camera_x, 0);
