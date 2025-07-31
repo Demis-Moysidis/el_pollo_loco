@@ -9,3 +9,9 @@ function setStoppableInterval(fn, time) {
 function stopGame() {
     intervalIds.forEach(clearInterval);
 }
+
+function avoidFocusTracking(){
+    document.addEventListener('click', e => {
+        e.target.blur?.();
+    });
+}

@@ -3,13 +3,23 @@ let world;
 let keyboard = new Keyboard();
 
 function init() {
-    
-
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    avoidFocusTracking();
+}
 
-    // console.log('My world is ',  world);
+function startGame(){
+    initLevel();
+    world = new World(canvas, keyboard);
+}
+
+function lostGame(){
+    stopGame();
+    cancelAnimationFrame(world.animationFrame);
+
+    let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     
+    document.getElementById('canvas').classList.add('lost_game');
 }
 
 window.addEventListener('keydown', (event) => {

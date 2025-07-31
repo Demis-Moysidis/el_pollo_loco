@@ -21,6 +21,8 @@ class World {
     checkIfEndbossWasTriggered = false;
     endbossHealth = 100;
 
+    animationFrame;
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -181,7 +183,7 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
 
         let self = this;
-        requestAnimationFrame(function() {
+        this.animationFrame = requestAnimationFrame(function() {
             self.draw();
         })
     }
