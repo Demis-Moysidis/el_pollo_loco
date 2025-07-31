@@ -30,7 +30,8 @@ class DrawableObject {
            this instanceof ChickenNormal || 
            this instanceof Endboss || 
            this instanceof ChickenSmall ||
-           this instanceof ThrowableObject)
+           this instanceof ThrowableObject ||
+           this instanceof Coin)
         {
             this.drawBlueBorder(ctx);
             this.drawRedBorder(ctx);

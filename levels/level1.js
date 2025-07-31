@@ -16,6 +16,14 @@ const level1 = new Level([
         new Cloud(1, 1900),
         new Cloud(2, 2400),
     ],
+
+    [
+        new Coin(500, 500),
+        new Coin(1500, 500),
+        new Coin(2000, 500),
+        new Coin(2500, 500),
+        new Coin(3000, 500),
+    ],
     [
         new BackgroundObject('img/5_background/layers/air.png', -720 * 2),
         new BackgroundObject('img/5_background/layers/air.png', -720),

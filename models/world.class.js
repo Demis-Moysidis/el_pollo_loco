@@ -15,7 +15,8 @@ class World {
     
     checkIfEndbossWasTriggered = false;
     endbossHealth = 100;
-    
+    coinPercentage = 0;
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -83,32 +84,39 @@ class World {
 
     checkCollisions(){
         this.level.enemies.forEach( (enemy) => {
-            if(this.character.isColliding(enemy)){
-                if(this.checkIfCollisionWasJumpAttackFromCharacter(enemy) && this.character.isAboveGround() && !this.character.isDead() && !enemy.isDead()){
+            if(this.character.isColliding(enemy) && !enemy.isDead() && !this.character.isDead()){
+                if(this.checkIfCollisionWasJumpAttackFromCharacter(enemy)){
                     enemy.hit(100);
                     this.character.jump(-5, 2);
-                }else{
-                    if(!enemy.isDead() && !this.character.isDead()){
-                        this.character.hit(20);
-                        if(enemy instanceof Endboss){
-                            this.character.hitByEndboss();
-                        }
-                        this.statusBarCharacterHealth.setPercentage(this.character.energy);
+                }else{  
+                    this.character.hit(20);
+                    if(enemy instanceof Endboss){
+                        this.character.hitByEndboss();
                     }
+                    this.statusBarCharacterHealth.setPercentage(this.character.energy);
                 }
             };
 
-            this.throwableObjects.forEach( (bottle) => {
-                if(enemy.isColliding(bottle) && !bottle.isBottleAlreadySplashed()){
-                    if(enemy instanceof Endboss){
-                        enemy.hit(20);
-                        this.statusBarEndbossHealth.setPercentage(enemy.energy);
-                        bottle.setBottleAlreadySplashed();
-                    }else{
-                        enemy.hit(100);
-                    }
+        this.throwableObjects.forEach( (bottle) => {
+            if(enemy.isColliding(bottle) && !bottle.isBottleAlreadySplashed()){
+                if(enemy instanceof Endboss){
+                    enemy.hit(20);
+                    this.statusBarEndbossHealth.setPercentage(enemy.energy);
+                    bottle.setBottleAlreadySplashed();
+                }else{
+                    enemy.hit(100);
                 }
-            })
+            }
+        })
+
+
+        this.level.coins.forEach((coin) => {
+            if(this.character.isColliding(coin) && !coin.isCollected()){
+                coin.collect();
+                this.coinPercentage += 20;
+                this.statusBarCharacterCoin.setPercentage(this.coinPercentage)
+            }
+        })
         })
     }
 
@@ -125,6 +133,7 @@ class World {
         
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.coins);
 
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBarCharacterHealth);
