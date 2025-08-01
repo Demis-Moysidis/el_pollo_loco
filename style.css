@@ -11,7 +11,7 @@ body {
     height: 100vh;
     align-items: center;
     margin: 0;
-    gap: 10px;
+    gap: 20px;
 
     background-image: linear-gradient(rgba(0,0,0,0.5)), url('./img/5_background/second_half_background.png');
     background-position: center;
@@ -35,7 +35,7 @@ h1 {
 canvas {
     background-image: url('img/9_intro_outro_screens/start/startscreen_2.png');
     background-size: contain;
-    background-position: bottom;
+    background-position: top;
     background-repeat: no-repeat;
 }
 
@@ -45,13 +45,13 @@ canvas {
 
 .lost_game {
     background-size: 70%, contain;
-    background-position: center 65%, center;
+    background-position: center 50%, top;
     background-image: url('img/You won, you lost/You lost.png'), url('img/5_background/first_half_background.png');
 }
 
 .won_game {
-    background-size: 55%, contain;
-    background-position: center;
+    background-size: 50%, contain;
+    background-position: center 35%, top;
     background-image: url('img/You won, you lost/You won A.png'), url('img/5_background/first_half_background.png');
 }
 
@@ -86,25 +86,25 @@ button:active {
 .start_game_btn {
     position: absolute;
     left: 50%;
-    top: 22%;
+    top: 6%;
     transform: translateX(-50%);
 }
 
 .play_again_top {
-    top: 17%;
+    top: 9%;
 }
 
 .stop_game_btn {
     position: absolute;
     right: 70px;
-    bottom: 10px;
+    top: 10px;
     
 }
 
 .music_btn {
     position: absolute;
     right: 20px;
-    bottom: 10px;
+    top: 10px;
 }
 
 .gameplay_btn {
