@@ -11,9 +11,9 @@ body {
     height: 100vh;
     align-items: center;
     margin: 0;
-    gap: 20px;
+    gap: 10px;
 
-    background-image: linear-gradient(rgba(0,0,0,0.4)), url('./img/5_background/second_half_background.png');
+    background-image: linear-gradient(rgba(0,0,0,0.5)), url('./img/5_background/second_half_background.png');
     background-position: center;
     background-size: cover;
 }
@@ -24,6 +24,7 @@ h1 {
     font-size: 80px;
     letter-spacing: 5px;
     margin: 0;
+    text-align: center;
     color: #ffc300;
     text-shadow: -1px -1px 0 #9a3a17,
                   5px -1px 0 #9a3a17,
@@ -34,27 +35,84 @@ h1 {
 canvas {
     background-image: url('img/9_intro_outro_screens/start/startscreen_2.png');
     background-size: contain;
-    background-position: center;
+    background-position: bottom;
     background-repeat: no-repeat;
 }
 
-.lost_game{
+.canvas_div {
+    position: relative;
+}
+
+.lost_game {
     background-size: 70%, contain;
     background-position: center 65%, center;
     background-image: url('img/You won, you lost/You lost.png'), url('img/5_background/first_half_background.png');
 }
 
+.won_game {
+    background-size: 55%, contain;
+    background-position: center;
+    background-image: url('img/You won, you lost/You won A.png'), url('img/5_background/first_half_background.png');
+}
+
 button{
-    /* position: absolute; */
    font-family: 'Zabars';
    border-radius: 8px;
-   border: 3px solid black;
+   border: 3px solid #9a3a17;
+   color: #9a3a17;
    padding: 8px;
    font-size: 34px;
+   transition: all 0.2s ease;
+
+   background: linear-gradient(to bottom, #ff9900, #ffdd00, #ff9900);
+
+   display: flex;
+   align-items: center;
+}
+
+button img{
+    margin: -7px;
 }
 
 button:hover {
     cursor: pointer;
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.start_game_btn {
+    position: absolute;
+    left: 50%;
+    top: 22%;
+    transform: translateX(-50%);
+}
+
+.play_again_top {
+    top: 17%;
+}
+
+.stop_game_btn {
+    position: absolute;
+    right: 70px;
+    bottom: 10px;
+    
+}
+
+.music_btn {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+}
+
+.gameplay_btn {
+    width: 32px;
+}
+
+.d_none {
+    display: none;
 }
 
 @media (max-width: 720px) {

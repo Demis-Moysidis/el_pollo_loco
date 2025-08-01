@@ -22,6 +22,7 @@ class World {
     endbossHealth = 100;
 
     animationFrame;
+    lostGameParam = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -46,7 +47,15 @@ class World {
             this.checkStartBattleAgainstEndboss();
             this.checkEndbossDead();
             this.checkIfAllBottlesAreThrowen();
+            this.checkIfCharacterIsDead();
         }, 1000 / 60)
+    }
+
+    checkIfCharacterIsDead(){
+        if(this.character.isDead() && !this.lostGameParam){
+            this.lostGameParam = true;
+            setTimeout(lostGame, 2000);
+        }
     }
 
     checkEndbossDead(){
@@ -54,8 +63,9 @@ class World {
             if(enemy instanceof Endboss){
                 if(enemy.energy > 0){
                     this.endbossHealth = true;
-                }else{
+                }else if(this.endbossHealth == true){
                     this.endbossHealth = false;
+                    setTimeout(wonGame, 2000);
                 }
             }
         })
@@ -92,9 +102,12 @@ class World {
     checkIfAllBottlesAreThrowen(){
         if(this.thrownBottles == 10 
             && this.endbossHealth 
-            && this.throwableObjects.every(bottle => bottle.bottleAlreadySplashed == true))
+            && this.throwableObjects.every(bottle => bottle.bottleAlreadySplashed == true
+            && !this.lostGameParam
+            ))
         {
-                stopGame();
+                this.lostGameParam = true;
+                setTimeout(lostGame, 1000);
         }
     }
 
