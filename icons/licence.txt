@@ -1,0 +1,5 @@
+This project uses icons from Google Fonts Icons.
+
+Source: https://fonts.google.com/icons
+License: Apache License 2.0
+Copyright 2022 Google

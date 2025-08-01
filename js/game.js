@@ -14,7 +14,10 @@ function startGame(){
     world = new World(canvas, keyboard);
 
     document.getElementById('start_game_btn').classList.toggle('d_none');
-    document.getElementById('stop_game_btn').classList.toggle('d_none');
+    document.getElementById('cancel_game_btn').classList.toggle('d_none');
+    document.getElementById('pause_btn').classList.toggle('d_none');
+
+    resumeInterval();
 }
 
 function playAgain(){
@@ -22,10 +25,13 @@ function playAgain(){
     world = new World(canvas, keyboard);
 
     document.getElementById('play_again_btn').classList.toggle('d_none');
-    document.getElementById('stop_game_btn').classList.toggle('d_none');
+    document.getElementById('cancel_game_btn').classList.toggle('d_none');
+    document.getElementById('pause_btn').classList.toggle('d_none');
+
+    resumeInterval();
 }
 
-function stopGame(){
+function cancelGame(){
     stopGameByIntervals();
     cancelAnimationFrame(world.animationFrame);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -34,7 +40,10 @@ function stopGame(){
     document.getElementById('canvas').classList.remove('won_game');
 
     document.getElementById('start_game_btn').classList.toggle('d_none');
-    document.getElementById('stop_game_btn').classList.toggle('d_none');
+    document.getElementById('cancel_game_btn').classList.toggle('d_none');
+    document.getElementById('pause_btn').classList.toggle('d_none');
+
+    resumeInterval();
 }
 
 function lostGame(){
@@ -47,7 +56,8 @@ function lostGame(){
     document.getElementById('canvas').classList.add('lost_game');
 
     document.getElementById('play_again_btn').classList.toggle('d_none');
-    document.getElementById('stop_game_btn').classList.toggle('d_none');
+    document.getElementById('cancel_game_btn').classList.toggle('d_none');
+    document.getElementById('pause_btn').classList.toggle('d_none');
 }
 
 function wonGame(){
@@ -58,7 +68,23 @@ function wonGame(){
     document.getElementById('canvas').classList.add('won_game');
 
     document.getElementById('play_again_btn').classList.toggle('d_none');
-    document.getElementById('stop_game_btn').classList.toggle('d_none');
+    document.getElementById('cancel_game_btn').classList.toggle('d_none');
+    document.getElementById('pause_btn').classList.toggle('d_none');
+}
+
+function pauseGame(){
+    if(isPaused == false){
+        pauseInterval();
+    }else{
+        resumeInterval();
+    }
+
+    document.getElementById('pause_game').classList.toggle('d_none');
+    document.getElementById('run_game').classList.toggle('d_none');
+}
+
+function infoGame(){
+    
 }
 
 function musicToggle(){

@@ -48,9 +48,9 @@
             </button>
         </div>
 
-        <div id="stop_game_btn" class="stop_game_btn d_none">
-            <button onclick="stopGame()">
-                <img class="gameplay_btn" src="icons/stop_circle.svg" alt="">
+        <div id="cancel_game_btn" class="cancel_game_btn d_none">
+            <button onclick="cancelGame()">
+                <img class="gameplay_btn" src="icons/cancel.svg" alt="">
             </button>
         </div>
 
@@ -61,16 +61,30 @@
             </button>
         </div>
 
+        <div id="pause_btn" class="pause_btn d_none">
+            <button onclick="pauseGame()">
+                <img id="pause_game" class="gameplay_btn" src="icons/pause_circle.svg" alt="">
+                <img id="run_game" class="gameplay_btn d_none" src="icons/play_circle.svg" alt="">
+            </button>
+        </div>
+
+        <div id="info_game_btn" class="info_game_btn">
+            <button onclick="infoGame()">
+                <img class="gameplay_btn" src="icons/info_i.svg" alt="">
+            </button>
+        </div>
+
         <div id="play_again_btn" class="start_game_btn play_again_top d_none">
             <button onclick="playAgain()">
                 Play Again
                 <img src="icons/play_arrow.svg" alt="">
             </button>
         </div>
-    </div>
-    
-    
 
-    </canvas>
+    </div>
+
+
+    
+    
 </body>
 </html>
