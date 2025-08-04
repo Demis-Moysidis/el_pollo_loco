@@ -1,6 +1,8 @@
 let soundOn = false;
+let runningAudios = [];
 
 function setStoppableSound(sound, volume=0.1, resetTime=false){
+    
     if(resetTime){
         sound.currentTime = 0;
     }
@@ -8,6 +10,11 @@ function setStoppableSound(sound, volume=0.1, resetTime=false){
     if(soundOn){
         sound.volume = volume;
         sound.play();   
+    }
+
+    if(!sound._isInit){
+        runningAudios.push(sound);
+        sound._isInit = true;
     }
 }
 
@@ -24,7 +31,6 @@ mainSound.loop = true;
 
 const endbossSound = new Audio('./audio/endboss.mp3');
 endbossSound.loop = true;
-
 
 const gameOverSound = new Audio('./audio/game_over.mp3');
 const wonGameSound = new Audio('./audio/won.mp3');

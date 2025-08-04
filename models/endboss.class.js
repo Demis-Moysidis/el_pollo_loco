@@ -48,6 +48,10 @@ class Endboss extends CollidableObject {
 
     hitEndbossSound = new Audio('./audio/hit_endboss.mp3');
 
+    initFlapAndAttackSound = false;
+    flapSound = new Audio('./audio/endboss_flap.mp3');
+    attackSound = new Audio('./audio/endboss_attack.mp3')
+
     offset = {
         top: 90,
         bottom: 70,
@@ -112,7 +116,9 @@ class Endboss extends CollidableObject {
     setAttackingIntervals(){
         setStoppableInterval( () => {
             if(!this.isDead()){
-                this.jump(-12);
+                this.jump(-12);         
+                setStoppableSound(this.flapSound, 0.7);
+                setStoppableSound(this.attackSound, 0.2);         
             }
         }, 5000)
     }

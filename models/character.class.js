@@ -65,7 +65,11 @@ class Character extends CollidableObject {
     ];
     hitCharacterSound = new Audio('./audio/hit.mp3');
     throwSound = new Audio('./audio/throw.mp3');
+    
+    initJumpSound = false;
+    jumpSound = new Audio('./audio/jump.mp3');
 
+    initSnoringSound = false;
     snoringCharacterSound = new Audio('./audio/snoring.mp3')
 
     world;
@@ -124,6 +128,13 @@ class Character extends CollidableObject {
 
                 if(this.world.keyboard.SPACE && !this.isAboveGround()) {
                     this.pauseSnoringSound();
+
+                    
+    
+                    
+                    setStoppableSound(this.jumpSound);
+                        
+
                     this.jump(-12.5);
 
                     this.setTimeStampForIdle();
@@ -151,7 +162,10 @@ class Character extends CollidableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                 }else if(this.checkIfTimeStampForLongIdle()){
                     this.playAnimation(this.IMAGES_IDLE_LONG);
+                    
+                    
                     setStoppableSound(this.snoringCharacterSound, 0.2);
+                        
                 }else{
                     this.playAnimation(this.IMAGES_IDLE_SHORT);
                 }

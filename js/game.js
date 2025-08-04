@@ -2,9 +2,8 @@ let canvas;
 let ctx;
 let world;
 let keyboard = new Keyboard();
-let mainSoundCurrent = true;
-let backgroundSoundIsPlaying = true;
-let currentGameWon = false;
+
+let firstActivationOfMainSound = true;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -25,6 +24,7 @@ function startGame(){
     // endbossSound.pause();
     // setStoppableSound(mainSound);
     
+    // setStoppableSound(mainSound);
 }
 
 function playAgain(){
@@ -38,7 +38,7 @@ function playAgain(){
     resumeInterval();
     wonGameSound.pause();
     endbossSound.pause();
-    backgroundSoundIsPlaying = true;
+    
     setStoppableSound(mainSound);
 
 }
@@ -58,8 +58,11 @@ function cancelGame(){
     resumeInterval();
     
     endbossSound.pause();
-    backgroundSoundIsPlaying = true;
-    mainSoundCurrent = true;
+    
+    
+
+    world?.character.pauseSnoringSound();
+
     setStoppableSound(mainSound);
 
 }
@@ -75,10 +78,7 @@ function lostGame(){
 
     document.getElementById('play_again_btn').classList.toggle('d_none');
  
-    mainSoundCurrent = true;
-    backgroundSoundIsPlaying = false;
-
-    currentGameWon = false;
+    
 }
 
 function wonGame(){
@@ -90,10 +90,6 @@ function wonGame(){
 
     document.getElementById('play_again_btn').classList.toggle('d_none');
     
-    mainSoundCurrent = true;
-    backgroundSoundIsPlaying = false;
-
-    currentGameWon = true;
 }
 
 function pauseGame(){
@@ -103,6 +99,8 @@ function pauseGame(){
         resumeInterval();
     }
 
+    world?.character.pauseSnoringSound();
+    
     document.getElementById('pause_game').classList.toggle('d_none');
     document.getElementById('run_game').classList.toggle('d_none');
 }
@@ -116,23 +114,25 @@ function musicToggle(){
     document.getElementById('music_off').classList.toggle('d_none');
     document.getElementById('music_note').classList.toggle('d_none');
 
+    
     if(soundOn){
         setSoundOff();
-        mainSound.pause();
-        endbossSound.pause();
-        wonGameSound.pause();
-        world.character.pauseSnoringSound();
-    }else if(mainSoundCurrent && backgroundSoundIsPlaying){
-        setSoundOn();
-        setStoppableSound(mainSound);
-    }else if(!mainSoundCurrent && backgroundSoundIsPlaying){
-        setSoundOn();
-        setStoppableSound(endbossSound);
+
+        runningAudios.forEach((audio) => {
+            audio.muted = true;
+        });
     }else{
+        
         setSoundOn();
-        if(wonGameSound.paused && currentGameWon){
-            setStoppableSound(wonGameSound);
-        }
+        
+        runningAudios.forEach((audio) => {
+            audio.muted = false;
+        });   
+    }
+
+    if(firstActivationOfMainSound){
+        setStoppableSound(mainSound);
+        firstActivationOfMainSound = false;
     }
 }
 

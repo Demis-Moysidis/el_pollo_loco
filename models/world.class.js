@@ -94,7 +94,7 @@ class World {
 
                     mainSound.pause();
                     setStoppableSound(endbossSound, undefined, true);
-                    mainSoundCurrent = false;
+                    
                 } 
             }
         })
@@ -153,7 +153,7 @@ class World {
                         this.character.hitByEndboss();
                     }
                     this.statusBarCharacterHealth.setPercentage(this.character.energy);
-                    setStoppableSound(this.character.hitCharacterSound, 0.4);
+                    setStoppableSound(this.character.hitCharacterSound, 0.5);
                     this.character.pauseSnoringSound();
                 }
             };
@@ -166,7 +166,7 @@ class World {
                         bottle.setBottleAlreadySplashed();
 
                         setStoppableSound(enemy.hitEndbossSound);
-                    }else{
+                    }else if(!enemy.isDead()){
                         enemy.hit(100);
                         setStoppableSound(enemy.hitChickenSound);
                     }
