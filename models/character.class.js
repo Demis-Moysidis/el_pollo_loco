@@ -129,11 +129,6 @@ class Character extends CollidableObject {
                     this.setTimeStampForIdle();
                 }
 
-                if(this.world.keyboard.D){
-                    this.pauseSnoringSound();
-                    this.setTimeStampForIdle();
-                }
-
                 if(!this.isAboveGround()){
                     this.landedAfterHitByEndboss()
                 }       

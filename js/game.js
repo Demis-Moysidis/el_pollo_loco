@@ -4,6 +4,7 @@ let world;
 let keyboard = new Keyboard();
 let mainSoundCurrent = true;
 let backgroundSoundIsPlaying = true;
+let currentGameWon = false;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -76,6 +77,8 @@ function lostGame(){
  
     mainSoundCurrent = true;
     backgroundSoundIsPlaying = false;
+
+    currentGameWon = false;
 }
 
 function wonGame(){
@@ -89,6 +92,8 @@ function wonGame(){
     
     mainSoundCurrent = true;
     backgroundSoundIsPlaying = false;
+
+    currentGameWon = true;
 }
 
 function pauseGame(){
@@ -125,8 +130,8 @@ function musicToggle(){
         setStoppableSound(endbossSound);
     }else{
         setSoundOn();
-        if(wonGameSound.paused){
-            wonGameSound.play();
+        if(wonGameSound.paused && currentGameWon){
+            setStoppableSound(wonGameSound);
         }
     }
 }

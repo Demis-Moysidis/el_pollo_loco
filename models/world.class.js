@@ -112,6 +112,8 @@ class World {
 
             this.thrownBottles += 1;
 
+            this.character.pauseSnoringSound();
+            this.character.setTimeStampForIdle();
             setStoppableSound(this.character.throwSound, 0.3);
         }
     }
