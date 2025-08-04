@@ -42,7 +42,19 @@ canvas {
     background-size: contain;
     background-position: top;
     background-repeat: no-repeat;
+
+    
+    
 }
+
+.canvas_fullsreen {
+    
+    object-fit: contain;
+    width: 100vw;
+    max-height: 100vh;
+}
+
+
 
 .canvas_div {
     position: relative;
@@ -50,18 +62,25 @@ canvas {
     display: flex;
     flex-direction: column;
     gap: 12px;
+
+    align-items: center;
+    justify-content: center;
 }
 
 .lost_game {
-    background-size: 70%, contain;
+    background-size: auto 47%, contain;
     background-position: center 50%, top;
     background-image: url('img/You won, you lost/You lost.png'), url('img/5_background/first_half_background.png');
 }
 
 .won_game {
-    background-size: 50%, contain;
+    background-size: auto 70%, contain;
     background-position: center 35%, top;
     background-image: url('img/You won, you lost/You won A.png'), url('img/5_background/first_half_background.png');
+}
+
+.canvas_fullsreen_bg {
+    background-image: url('./img/transparent_picture.png');
 }
 
 button{
@@ -127,6 +146,10 @@ button:active {
     bottom: -50px;
 }
 
+.fullscreen_btn_fullscreen_mode {
+    bottom: 10px;
+}
+
 .info_game_btn {
     position: absolute;
     left: 10px;
@@ -147,6 +170,13 @@ button:active {
     color: #ff9900;
     background: rgba(0,0,0, 0.85);
     
+}
+
+.info_game_description_fullscreen_mode {
+    top: 50%;
+    left: 50%;
+    max-width: 800px;
+    transform: translate(-50%, -50%);
 }
 
 .info_game_description p {
@@ -207,6 +237,10 @@ button:active {
 
 .gameplay_btn {
     width: 32px;
+}
+
+.btn_fullscreen_mode {
+    top: 10px;
 }
 
 .d_none {

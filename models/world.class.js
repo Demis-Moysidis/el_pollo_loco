@@ -59,10 +59,10 @@ class World {
             setStoppableSound(gameOverSound);
             document.getElementById('cancel_game_btn').classList.toggle('d_none');
             document.getElementById('pause_btn').classList.toggle('d_none');
-            document.getElementById('fullscreen_btn').classList.toggle('d_none');
-            if(fullScreen){
-                fullscreenToggle();
-            }
+            
+            
+            
+            
             setTimeout(lostGame, 2000);
         }
     }
@@ -80,10 +80,8 @@ class World {
                     setStoppableSound(wonGameSound, undefined, true);
                     document.getElementById('cancel_game_btn').classList.toggle('d_none');
                     document.getElementById('pause_btn').classList.toggle('d_none');
-                    document.getElementById('fullscreen_btn').classList.toggle('d_none');
-                    if(fullScreen){
-                        fullscreenToggle();
-                    }
+                    
+                    
                     
                     setTimeout(wonGame, 2000);
                 }
@@ -141,10 +139,8 @@ class World {
                 setStoppableSound(gameOverSound);
                 document.getElementById('cancel_game_btn').classList.toggle('d_none');
                 document.getElementById('pause_btn').classList.toggle('d_none');
-                document.getElementById('fullscreen_btn').classList.toggle('d_none');
-                if(fullScreen){
-                    fullscreenToggle();
-                }
+                
+                
                 setTimeout(lostGame, 1000);
         }
     }

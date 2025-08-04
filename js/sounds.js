@@ -10,6 +10,9 @@ function setStoppableSound(sound, volume=0.1, resetTime=false){
     if(soundOn){
         sound.volume = volume;
         sound.play();   
+    }else{
+        sound.muted = true;
+        sound.play();
     }
 
     if(!sound._isInit){

@@ -5,6 +5,7 @@ let keyboard = new Keyboard();
 
 let firstActivationOfMainSound = true;
 let fullScreen = false;
+let leaveInfoWindow = false;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -19,7 +20,7 @@ function startGame(){
     document.getElementById('start_game_btn').classList.toggle('d_none');
     document.getElementById('cancel_game_btn').classList.toggle('d_none');
     document.getElementById('pause_btn').classList.toggle('d_none');
-    document.getElementById('fullscreen_btn').classList.toggle('d_none');
+    
 
     resumeInterval();
 
@@ -27,6 +28,8 @@ function startGame(){
     // setStoppableSound(mainSound);
     
     // setStoppableSound(mainSound);
+
+    document.getElementById('canvas').classList.toggle('canvas_fullsreen_bg');
 }
 
 function playAgain(){
@@ -36,13 +39,14 @@ function playAgain(){
     document.getElementById('play_again_btn').classList.toggle('d_none');
     document.getElementById('cancel_game_btn').classList.toggle('d_none');
     document.getElementById('pause_btn').classList.toggle('d_none');
-    document.getElementById('fullscreen_btn').classList.toggle('d_none');
+    
 
     resumeInterval();
     wonGameSound.pause();
     endbossSound.pause();
     
     setStoppableSound(mainSound);
+    document.getElementById('canvas').classList.toggle('canvas_fullsreen_bg');
 }
 
 function cancelGame(){
@@ -56,7 +60,7 @@ function cancelGame(){
     document.getElementById('start_game_btn').classList.toggle('d_none');
     document.getElementById('cancel_game_btn').classList.toggle('d_none');
     document.getElementById('pause_btn').classList.toggle('d_none');
-    document.getElementById('fullscreen_btn').classList.toggle('d_none');
+    
 
 
     resumeInterval();    
@@ -64,6 +68,8 @@ function cancelGame(){
     
     world?.character.pauseSnoringSound();
     setStoppableSound(mainSound);
+
+    document.getElementById('canvas').classList.toggle('canvas_fullsreen_bg');
 }
 
 function lostGame(){
@@ -76,6 +82,8 @@ function lostGame(){
     document.getElementById('canvas').classList.add('lost_game');
 
     document.getElementById('play_again_btn').classList.toggle('d_none');
+
+    document.getElementById('canvas').classList.toggle('canvas_fullsreen_bg');
 }
 
 function wonGame(){
@@ -86,10 +94,12 @@ function wonGame(){
     document.getElementById('canvas').classList.add('won_game');
 
     document.getElementById('play_again_btn').classList.toggle('d_none');
+
+    document.getElementById('canvas').classList.toggle('canvas_fullsreen_bg');
 }
 
 function pauseGame(){
-    if(isPaused == false){
+    if(!isPaused ){
         pauseInterval();
     }else{
         resumeInterval();
@@ -102,7 +112,15 @@ function pauseGame(){
 }
 
 function infoGame(){
-    pauseGame();
+    
+    if(!isPaused && !leaveInfoWindow){
+        pauseGame();
+    }else if(isPaused && leaveInfoWindow){
+        pauseGame();
+    }
+    
+    leaveInfoWindow = !leaveInfoWindow
+
     document.getElementById('info_game_description').classList.toggle('d_none');
 }
 
@@ -133,15 +151,31 @@ function musicToggle(){
 }
 
 function fullscreenToggle(){
+    document.getElementById('canvas').classList.toggle('canvas_fullsreen');
+    document.getElementById('fullscreen_btn').classList.toggle('fullscreen_btn_fullscreen_mode');
+    document.getElementById('pause_btn').classList.toggle('btn_fullscreen_mode');
+    document.getElementById('cancel_game_btn').classList.toggle('btn_fullscreen_mode');
+
+    document.getElementById('music_btn').classList.toggle('btn_fullscreen_mode');
+    document.getElementById('info_game_btn').classList.toggle('btn_fullscreen_mode');
+
+    document.getElementById('info_game_description').classList.toggle('info_game_description_fullscreen_mode');
+    
+
+    document.getElementById('fullscreen_on').classList.toggle('d_none');
+    document.getElementById('fullscreen_off').classList.toggle('d_none');
+
+
     
 
     if(fullScreen){
         document.exitFullscreen();
         fullScreen = false;
     }else{
-        canvas.requestFullscreen();
+        document.getElementById('canvas_div').requestFullscreen();
         fullScreen = true;
     }
+
 }
 
 window.addEventListener('keydown', (event) => {
