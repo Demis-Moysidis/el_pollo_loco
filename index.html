@@ -35,7 +35,7 @@
 <body onload="init()">
     <h1>El Pollo Loco</h1>
 
-    <div class="canvas_div">
+    <div id="canvas_div" class="canvas_div">
         <canvas id="canvas" width="720" height="480"></canvas>
 
         <div id="start_game_btn" class="start_game_btn">
@@ -75,6 +75,13 @@
             <button onclick="playAgain()">
                 Play Again
                 <img src="icons/play_arrow.svg" alt="">
+            </button>
+        </div>
+
+        <div id="fullscreen_btn" class="fullscreen_btn d_none">
+            <button onclick="fullscreenToggle()">
+                <img id="fullscreen_on" class="gameplay_btn" src="icons/fullscreen.svg" alt="">
+                <img id="fullscreen_off" class="gameplay_btn d_none" src="icons/fullscreen_exit.svg" alt="">
             </button>
         </div>
 

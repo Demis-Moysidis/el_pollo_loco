@@ -121,6 +121,12 @@ button:active {
     top: -50px;
 }
 
+.fullscreen_btn {
+    position: absolute;
+    right: 10px;
+    bottom: -50px;
+}
+
 .info_game_btn {
     position: absolute;
     left: 10px;

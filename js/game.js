@@ -4,6 +4,7 @@ let world;
 let keyboard = new Keyboard();
 
 let firstActivationOfMainSound = true;
+let fullScreen = false;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -18,6 +19,7 @@ function startGame(){
     document.getElementById('start_game_btn').classList.toggle('d_none');
     document.getElementById('cancel_game_btn').classList.toggle('d_none');
     document.getElementById('pause_btn').classList.toggle('d_none');
+    document.getElementById('fullscreen_btn').classList.toggle('d_none');
 
     resumeInterval();
 
@@ -34,13 +36,13 @@ function playAgain(){
     document.getElementById('play_again_btn').classList.toggle('d_none');
     document.getElementById('cancel_game_btn').classList.toggle('d_none');
     document.getElementById('pause_btn').classList.toggle('d_none');
+    document.getElementById('fullscreen_btn').classList.toggle('d_none');
 
     resumeInterval();
     wonGameSound.pause();
     endbossSound.pause();
     
     setStoppableSound(mainSound);
-
 }
 
 function cancelGame(){
@@ -54,17 +56,14 @@ function cancelGame(){
     document.getElementById('start_game_btn').classList.toggle('d_none');
     document.getElementById('cancel_game_btn').classList.toggle('d_none');
     document.getElementById('pause_btn').classList.toggle('d_none');
+    document.getElementById('fullscreen_btn').classList.toggle('d_none');
 
-    resumeInterval();
-    
+
+    resumeInterval();    
     endbossSound.pause();
     
-    
-
     world?.character.pauseSnoringSound();
-
     setStoppableSound(mainSound);
-
 }
 
 function lostGame(){
@@ -77,8 +76,6 @@ function lostGame(){
     document.getElementById('canvas').classList.add('lost_game');
 
     document.getElementById('play_again_btn').classList.toggle('d_none');
- 
-    
 }
 
 function wonGame(){
@@ -89,7 +86,6 @@ function wonGame(){
     document.getElementById('canvas').classList.add('won_game');
 
     document.getElementById('play_again_btn').classList.toggle('d_none');
-    
 }
 
 function pauseGame(){
@@ -133,6 +129,18 @@ function musicToggle(){
     if(firstActivationOfMainSound){
         setStoppableSound(mainSound);
         firstActivationOfMainSound = false;
+    }
+}
+
+function fullscreenToggle(){
+    
+
+    if(fullScreen){
+        document.exitFullscreen();
+        fullScreen = false;
+    }else{
+        canvas.requestFullscreen();
+        fullScreen = true;
     }
 }
 

@@ -34,7 +34,7 @@ class BackgroundObject extends MovableObject {
                     }
                  }    
             }
-        }, 1000 / 50 )
+        }, 1000 / 30 )
     }
 
     moveLeftLayerTwo(){
