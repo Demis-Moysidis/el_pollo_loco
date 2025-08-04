@@ -11,6 +11,7 @@ class ChickenNormal extends CollidableObject {
         'img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
     ]
 
+    hitChickenSound = new Audio('./audio/chicken.mp3');
 
     offset = {
         top: 10,

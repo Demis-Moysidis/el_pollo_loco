@@ -2,6 +2,8 @@ let canvas;
 let ctx;
 let world;
 let keyboard = new Keyboard();
+let mainSoundCurrent = true;
+let backgroundSoundIsPlaying = true;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -18,6 +20,10 @@ function startGame(){
     document.getElementById('pause_btn').classList.toggle('d_none');
 
     resumeInterval();
+
+    // endbossSound.pause();
+    // setStoppableSound(mainSound);
+    
 }
 
 function playAgain(){
@@ -29,6 +35,11 @@ function playAgain(){
     document.getElementById('pause_btn').classList.toggle('d_none');
 
     resumeInterval();
+    wonGameSound.pause();
+    endbossSound.pause();
+    backgroundSoundIsPlaying = true;
+    setStoppableSound(mainSound);
+
 }
 
 function cancelGame(){
@@ -44,6 +55,12 @@ function cancelGame(){
     document.getElementById('pause_btn').classList.toggle('d_none');
 
     resumeInterval();
+    
+    endbossSound.pause();
+    backgroundSoundIsPlaying = true;
+    mainSoundCurrent = true;
+    setStoppableSound(mainSound);
+
 }
 
 function lostGame(){
@@ -56,8 +73,9 @@ function lostGame(){
     document.getElementById('canvas').classList.add('lost_game');
 
     document.getElementById('play_again_btn').classList.toggle('d_none');
-    document.getElementById('cancel_game_btn').classList.toggle('d_none');
-    document.getElementById('pause_btn').classList.toggle('d_none');
+ 
+    mainSoundCurrent = true;
+    backgroundSoundIsPlaying = false;
 }
 
 function wonGame(){
@@ -68,8 +86,9 @@ function wonGame(){
     document.getElementById('canvas').classList.add('won_game');
 
     document.getElementById('play_again_btn').classList.toggle('d_none');
-    document.getElementById('cancel_game_btn').classList.toggle('d_none');
-    document.getElementById('pause_btn').classList.toggle('d_none');
+    
+    mainSoundCurrent = true;
+    backgroundSoundIsPlaying = false;
 }
 
 function pauseGame(){
@@ -84,12 +103,32 @@ function pauseGame(){
 }
 
 function infoGame(){
-    
+    pauseGame();
+    document.getElementById('info_game_description').classList.toggle('d_none');
 }
 
 function musicToggle(){
     document.getElementById('music_off').classList.toggle('d_none');
     document.getElementById('music_note').classList.toggle('d_none');
+
+    if(soundOn){
+        setSoundOff();
+        mainSound.pause();
+        endbossSound.pause();
+        wonGameSound.pause();
+        world.character.pauseSnoringSound();
+    }else if(mainSoundCurrent && backgroundSoundIsPlaying){
+        setSoundOn();
+        setStoppableSound(mainSound);
+    }else if(!mainSoundCurrent && backgroundSoundIsPlaying){
+        setSoundOn();
+        setStoppableSound(endbossSound);
+    }else{
+        setSoundOn();
+        if(wonGameSound.paused){
+            wonGameSound.play();
+        }
+    }
 }
 
 window.addEventListener('keydown', (event) => {

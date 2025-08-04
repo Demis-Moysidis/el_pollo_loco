@@ -26,10 +26,15 @@ h1 {
     margin: 0;
     text-align: center;
     color: #ffc300;
-    text-shadow: -1px -1px 0 #9a3a17,
-                  5px -1px 0 #9a3a17,
-                 -1px  1px 0 #9a3a17,
-                  1px  1px 0 #9a3a17;
+    text-shadow: 5px -1px 0 #9a3a17;
+                 
+}
+
+h3 {
+    letter-spacing: 2px;
+    text-shadow: 3px -1px 0 #9a3a17;
+    text-align: center;
+    margin: 0;
 }
 
 canvas {
@@ -122,6 +127,78 @@ button:active {
     top: -50px;
 }
 
+.info_game_description {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    right: 25px;
+    
+
+    padding: 32px;
+    border-radius: 8px;
+
+    font-size: 24px;
+    color: #ff9900;
+    background: rgba(0,0,0, 0.85);
+    
+}
+
+.info_game_description p {
+    margin: 0;
+}
+
+.info_game_description_close {
+    position: absolute;
+    right: -20px;
+    top: -20px;
+}
+
+.info_game_description_close img {
+    width: 25px;
+    
+}
+
+.info_game_controls {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.info_game_controls p{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info_game_controls p img, .info_game_controls p span {
+    background-color: #ff9900;
+    border-radius: 8px;
+    box-shadow: 2px 0px 0 2px #9a3a17;
+}
+
+.info_game_controls p span {
+    width: 48px;
+    height: 48px;
+    color: #9a3a17;
+    font-size: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info_game_controls_jump img {
+    width: 150px;
+    height: 48px;
+}
+
+.info_game_position_relativ {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
 .gameplay_btn {
     width: 32px;
 }
@@ -129,6 +206,12 @@ button:active {
 .d_none {
     display: none;
 }
+
+.opacity {
+    opacity: 0;
+}
+
+
 
 @media (max-width: 720px) {
     canvas {

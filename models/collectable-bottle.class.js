@@ -8,6 +8,8 @@ class CollectableBottle extends CollectableObject {
     //     'img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
     // ];
 
+    collectedBottleSound = new Audio('./audio/collected_bottle.mp3');
+
     offset = {
         top: 10,
         bottom: 10,

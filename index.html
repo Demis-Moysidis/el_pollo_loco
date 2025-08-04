@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Pollo Loco</title>
+    <link rel="shortcut icon" href="./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
 
     <script src="./js/helper-functions.js"></script>
+    <script src="./js/sounds.js"></script>
 
     <script src="./models/drawable-object.class.js"></script>
     <script src="./models/movable-object.class.js"></script>
@@ -31,12 +33,7 @@
     <script src="./js/game.js"></script>
 </head>
 <body onload="init()">
-    
     <h1>El Pollo Loco</h1>
-    
-    
-    <!-- <button onclick="lostGame()">Lost Game</button>
-    <button onclick="wonGame()">Won Game</button> -->
 
     <div class="canvas_div">
         <canvas id="canvas" width="720" height="480"></canvas>
@@ -56,8 +53,8 @@
 
         <div id="music_btn" class="music_btn">
             <button onclick="musicToggle()">
-                <img id="music_note" class="gameplay_btn" src="icons/music_note.svg" alt="">
-                <img id="music_off" class="gameplay_btn d_none" src="icons/music_off.svg" alt="">
+                <img id="music_note" class="gameplay_btn d_none" src="icons/music_note.svg" alt="">
+                <img id="music_off" class="gameplay_btn" src="icons/music_off.svg" alt="">
             </button>
         </div>
 
@@ -81,10 +78,38 @@
             </button>
         </div>
 
+        <div id="info_game_description" class="info_game_description d_none">
+            <div class="info_game_position_relativ">
+                <button onclick="infoGame()" class="info_game_description_close">
+                    <img src="icons/close.svg" alt="">
+                </button>
+                <h3>Game Rules</h3>
+                <p>Defeat enemies by jumping on them or throwing collected bottles.
+                You win the game by defeating the Endboss, but if you run out of 
+                bottles before the boss is defeated, you lose! 
+                </p>
+                <h3>Controls</h3>
+                <div class="info_game_controls">
+                    <p>
+                        Left:
+                        <img src="icons/arrow_left.svg" alt="">
+                    </p>
+                    <p>
+                        Right:
+                        <img src="icons/arrow_right.svg" alt="">
+                    </p>
+                    <p class="info_game_controls_jump">
+                        Jump:
+                        <img src="icons/space_bar.svg" alt="">
+                    </p>
+                    <p>
+                        Throw:
+                        <span>D</span>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
-
-    
-    
 </body>
 </html>

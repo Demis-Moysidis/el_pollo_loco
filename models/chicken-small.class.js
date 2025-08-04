@@ -9,7 +9,9 @@ class ChickenSmall extends CollidableObject {
     ];
     IMAGES_DEAD =[
         'img/3_enemies_chicken/chicken_small/2_dead/dead.png'
-    ]
+    ];
+
+    hitChickenSound = new Audio('./audio/chicken.mp3');
 
     offset = {
         top: 10,

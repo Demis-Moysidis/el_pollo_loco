@@ -54,6 +54,11 @@ class World {
     checkIfCharacterIsDead(){
         if(this.character.isDead() && !this.lostGameParam){
             this.lostGameParam = true;
+            mainSound.pause();
+            endbossSound.pause();
+            setStoppableSound(gameOverSound);
+            document.getElementById('cancel_game_btn').classList.toggle('d_none');
+            document.getElementById('pause_btn').classList.toggle('d_none');
             setTimeout(lostGame, 2000);
         }
     }
@@ -65,6 +70,12 @@ class World {
                     this.endbossHealth = true;
                 }else if(this.endbossHealth == true){
                     this.endbossHealth = false;
+
+                    
+                    endbossSound.pause();
+                    setStoppableSound(wonGameSound, undefined, true);
+                    document.getElementById('cancel_game_btn').classList.toggle('d_none');
+                    document.getElementById('pause_btn').classList.toggle('d_none');
                     setTimeout(wonGame, 2000);
                 }
             }
@@ -80,6 +91,10 @@ class World {
                     this.checkIfEndbossWasTriggered = true;   
                     
                     this.statusBarEndbossHealth.flyIn();
+
+                    mainSound.pause();
+                    setStoppableSound(endbossSound, undefined, true);
+                    mainSoundCurrent = false;
                 } 
             }
         })
@@ -95,7 +110,9 @@ class World {
             this.bottlePercentage -= 20;
             this.statusBarCharacterBottle.setPercentage(this.bottlePercentage);
 
-            this.thrownBottles += 1; 
+            this.thrownBottles += 1;
+
+            setStoppableSound(this.character.throwSound, 0.3);
         }
     }
 
@@ -107,6 +124,12 @@ class World {
             ))
         {
                 this.lostGameParam = true;
+
+                mainSound.pause();
+                endbossSound.pause();
+                setStoppableSound(gameOverSound);
+                document.getElementById('cancel_game_btn').classList.toggle('d_none');
+                document.getElementById('pause_btn').classList.toggle('d_none');
                 setTimeout(lostGame, 1000);
         }
     }
@@ -121,33 +144,41 @@ class World {
                 if(this.checkIfCollisionWasJumpAttackFromCharacter(enemy)){
                     enemy.hit(100);
                     this.character.jump(-5, 2);
+                    setStoppableSound(enemy.hitChickenSound, 0.05);
                 }else{  
                     this.character.hit(20);
                     if(enemy instanceof Endboss){
                         this.character.hitByEndboss();
                     }
                     this.statusBarCharacterHealth.setPercentage(this.character.energy);
+                    setStoppableSound(this.character.hitCharacterSound, 0.4);
+                    this.character.pauseSnoringSound();
                 }
             };
 
-        this.throwableObjects.forEach( (bottle) => {
-            if(enemy.isColliding(bottle) && !bottle.isBottleAlreadySplashed()){
-                if(enemy instanceof Endboss){
-                    enemy.hit(20);
-                    this.statusBarEndbossHealth.setPercentage(enemy.energy);
-                    bottle.setBottleAlreadySplashed();
-                }else{
-                    enemy.hit(100);
-                }
-            }
-        })
+            this.throwableObjects.forEach( (bottle) => {
+                if(enemy.isColliding(bottle) && !bottle.isBottleAlreadySplashed()){
+                    if(enemy instanceof Endboss){
+                        enemy.hit(20);
+                        this.statusBarEndbossHealth.setPercentage(enemy.energy);
+                        bottle.setBottleAlreadySplashed();
 
+                        setStoppableSound(enemy.hitEndbossSound);
+                    }else{
+                        enemy.hit(100);
+                        setStoppableSound(enemy.hitChickenSound);
+                    }
+                }
+            })
+        })
 
         this.level.coins.forEach((coin) => {
             if(this.character.isColliding(coin) && !coin.isCollected()){
                 coin.collect();
                 this.coinPercentage += 20;
-                this.statusBarCharacterCoin.setPercentage(this.coinPercentage)
+                this.statusBarCharacterCoin.setPercentage(this.coinPercentage);
+
+                setStoppableSound(coin.coinSound);
             }
         })
 
@@ -156,13 +187,10 @@ class World {
                 cb.collect();
                 this.bottlePercentage += 20;
                 this.statusBarCharacterBottle.setPercentage(this.bottlePercentage);
+                setStoppableSound(cb.collectedBottleSound, 0.5);
             }
         })
-
-        })
     }
-
-
 
     checkIfCollisionWasJumpAttackFromCharacter(enemy){
         return enemy.lastY + enemy.offset.top > this.character.lastY + this.character.height - this.character.offset.bottom

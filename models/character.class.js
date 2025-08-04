@@ -63,6 +63,10 @@ class Character extends CollidableObject {
         'img/2_character_pepe/1_idle/long_idle/I-19.png',
         'img/2_character_pepe/1_idle/long_idle/I-20.png',
     ];
+    hitCharacterSound = new Audio('./audio/hit.mp3');
+    throwSound = new Audio('./audio/throw.mp3');
+
+    snoringCharacterSound = new Audio('./audio/snoring.mp3')
 
     world;
     speed = 5;
@@ -97,6 +101,7 @@ class Character extends CollidableObject {
         setStoppableInterval(() => {
             if(!this.deathRegistered && this.world.endbossHealth){
                 if(this.isAttackedByEndboss()){
+                    this.pauseSnoringSound();
                     this.moveLeft();
                     if(this.world.keyboard.LEFT){
                         this.otherDirection = true;
@@ -104,13 +109,13 @@ class Character extends CollidableObject {
                         this.otherDirection = false;
                     }
                 }else if(this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && this.x > this.world.level.level_start_x){
-                   
+                    this.pauseSnoringSound();
                     this.moveLeft();
                     this.otherDirection = true;
 
                     this.setTimeStampForIdle();
                 }else if(this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && this.x < this.world.level.level_end_x){
-                    
+                    this.pauseSnoringSound();
                     this.moveRight();
                     this.otherDirection = false;
 
@@ -118,13 +123,14 @@ class Character extends CollidableObject {
                 }
 
                 if(this.world.keyboard.SPACE && !this.isAboveGround()) {
-                    
+                    this.pauseSnoringSound();
                     this.jump(-12.5);
 
                     this.setTimeStampForIdle();
                 }
 
                 if(this.world.keyboard.D){
+                    this.pauseSnoringSound();
                     this.setTimeStampForIdle();
                 }
 
@@ -150,6 +156,7 @@ class Character extends CollidableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                 }else if(this.checkIfTimeStampForLongIdle()){
                     this.playAnimation(this.IMAGES_IDLE_LONG);
+                    setStoppableSound(this.snoringCharacterSound, 0.2);
                 }else{
                     this.playAnimation(this.IMAGES_IDLE_SHORT);
                 }
@@ -163,6 +170,10 @@ class Character extends CollidableObject {
 
     checkIfTimeStampForLongIdle(){
         return new Date().getTime() - this.timeStampForIdle > 5000;
+    }
+
+    pauseSnoringSound(){
+        this.snoringCharacterSound.pause();
     }
 
 }

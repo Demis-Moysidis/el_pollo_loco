@@ -10,6 +10,8 @@ class Coin extends CollectableObject {
         'img/8_coin/coin_2.png' 
     ];
 
+    coinSound = new Audio('./audio/coin.mp3');
+
     offset = {
         top: 35,
         bottom: 35,
