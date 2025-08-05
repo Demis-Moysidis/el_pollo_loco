@@ -1,0 +1,65 @@
+@font-face {
+    font-family: 'Zabars';
+    src: url('../fonts/zabars/Zabars.ttf');
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Zabars';
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    gap: 20px;
+    background-image: linear-gradient(rgba(0,0,0,0.5)), url('../img/5_background/second_half_background.png');
+    background-position: center;
+    background-size: cover;
+    padding: 8px;
+}
+
+h1 {
+    font-size: 80px;
+    letter-spacing: 5px;
+    margin: 0;
+    text-align: center;
+    color: #ffc300;
+    text-shadow: 5px -1px 0 #9a3a17;
+    margin-bottom: 40px;         
+}
+
+h2 {
+    color: #ff9900;
+    letter-spacing: 2px;
+    text-shadow: 3px -1px 0 #9a3a17;
+    text-align: center;
+    margin: 15px 0 0 0;
+}
+
+a {
+    color: #9a3a17;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+a img {
+    width: 30px;
+}
+
+p {
+    color: #9a3a17;
+}
+
+b {
+    color: #9a3a17;
+    margin: 0;
+    letter-spacing: 1px;
+}
