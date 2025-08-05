@@ -12,14 +12,16 @@ body {
     font-family: 'Zabars';
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    height: fit-content;
     margin: 0;
     gap: 20px;
-    background-image: linear-gradient(rgba(0,0,0,0.5)), url('../img/5_background/second_half_background.png');
+    background-image: linear-gradient(rgba(0,0,0,0.1)), url('../img/5_background/second_half_background.png');
     background-position: center;
     background-size: cover;
+    background-repeat: no-repeat;
     padding: 8px;
 }
 
@@ -30,7 +32,7 @@ h1 {
     text-align: center;
     color: #ffc300;
     text-shadow: 5px -1px 0 #9a3a17;
-    margin-bottom: 40px;         
+    margin: 40px 0;         
 }
 
 h2 {
@@ -39,6 +41,7 @@ h2 {
     text-shadow: 3px -1px 0 #9a3a17;
     text-align: center;
     margin: 15px 0 0 0;
+    font-size: 28px;
 }
 
 a {
@@ -48,6 +51,7 @@ a {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    font-size: 24px;
 }
 
 a img {
@@ -56,10 +60,12 @@ a img {
 
 p {
     color: #9a3a17;
+    font-size: 24px;
 }
 
 b {
     color: #9a3a17;
     margin: 0;
     letter-spacing: 1px;
+    font-size: 24px;
 }
