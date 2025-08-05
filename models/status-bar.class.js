@@ -49,7 +49,7 @@ class StatusBar extends DrawableObject{
         super();
         this.type = type;
         this.percentage = percentage;
-        this.checkStatusBarType();
+        this.checkStatusBarType(type);
         this.x = x;
         this.y = y;
         this.width = 225;
@@ -57,7 +57,7 @@ class StatusBar extends DrawableObject{
         this.setPercentage(this.percentage);
     };
 
-    checkStatusBarType(){
+    checkStatusBarType(type){
         if(type == 'character_health'){
             this.loadImages(this.IMAGES_CHARACTER_HEALTH);
         }else if(type == 'character_bottle'){
