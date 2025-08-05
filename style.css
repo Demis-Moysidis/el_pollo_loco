@@ -348,6 +348,10 @@ button:active {
         object-fit: contain;
         width: 100%;
     }
+
+    .info_game_description{
+        font-size: 20px;
+    }
 }
 
 @media (max-width: 720px) {
