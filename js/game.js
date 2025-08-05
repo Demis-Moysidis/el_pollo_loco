@@ -159,7 +159,7 @@ function fullscreenToggle(){
     document.getElementById('music_btn').classList.toggle('btn_fullscreen_mode');
     document.getElementById('info_game_btn').classList.toggle('btn_fullscreen_mode');
 
-    document.getElementById('info_game_description').classList.toggle('info_game_description_fullscreen_mode');
+    
     
 
     document.getElementById('fullscreen_on').classList.toggle('d_none');
