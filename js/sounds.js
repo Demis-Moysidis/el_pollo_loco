@@ -2,7 +2,6 @@ let soundOn = false;
 let runningAudios = [];
 
 function setStoppableSound(sound, volume=0.1, resetTime=false){
-    
     if(resetTime){
         sound.currentTime = 0;
     }

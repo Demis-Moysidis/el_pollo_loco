@@ -2,7 +2,6 @@ class Endboss extends CollidableObject {
     height = 225;
     width = 175;
     y = 20;
-
     touchesTheGround = 210;
     
     IMAGES_ALERT = [
@@ -47,7 +46,6 @@ class Endboss extends CollidableObject {
     ];
 
     hitEndbossSound = new Audio('./audio/hit_endboss.mp3');
-
     initFlapAndAttackSound = false;
     flapSound = new Audio('./audio/endboss_flap.mp3');
     attackSound = new Audio('./audio/endboss_attack.mp3')
@@ -59,14 +57,11 @@ class Endboss extends CollidableObject {
         right: 30
     }
 
-    endbossWalkTimeStamp = 0;
-    
+    endbossWalkTimeStamp = 0;  
     jumpSpeed = 3;
     walkSpeed = 0.5;
     speed = 0.5;
     currentImage = 1;
-
-    
 
     constructor() {
         super().loadImage('img/4_enemie_boss_chicken/3_attack/G18.png');
@@ -75,13 +70,17 @@ class Endboss extends CollidableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_HURT);
-
         this.x = 4300;
-        // this.animate();
-        // this.applyGravity();
     }
 
     animate() {
+        this.setIntervalForPlayingAnimation();
+        this.setIntervalForCheckingAction();
+        this.setWalkingIntervals();
+        this.setAttackingIntervals();
+    };
+
+    setIntervalForPlayingAnimation(){
         setStoppableInterval( () => {
             if(this.isDead()){
                 this.playDeadAnimation()
@@ -96,8 +95,9 @@ class Endboss extends CollidableObject {
             }
             
         }, 140)
+    }
 
-
+    setIntervalForCheckingAction(){
         setStoppableInterval(() => {
             if((this.checkWalkingTime() || this.isAboveGround()) && !this.isDead()){
                 if(this.isAboveGround()){
@@ -108,9 +108,6 @@ class Endboss extends CollidableObject {
                 this.moveLeft();
             }
         }, 1000 /60)
-
-        this.setWalkingIntervals();
-        this.setAttackingIntervals();
     }
 
     setAttackingIntervals(){
@@ -121,16 +118,15 @@ class Endboss extends CollidableObject {
                 setStoppableSound(this.attackSound, 0.2);         
             }
         }, 5000)
-    }
+    };
 
     setWalkingIntervals(){
         setStoppableInterval( () => {
             this.endbossWalkTimeStamp = new Date().getTime();
         }, 3000)
-    }
+    };
 
     checkWalkingTime(){
        return new Date().getTime() - this.endbossWalkTimeStamp < 1000
-    }
-
+    };
 }

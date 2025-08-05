@@ -23,17 +23,14 @@ class CollidableObject extends MovableObject {
 
     hit(damage){
         if(this.hitTimeStamp()){
-
             this.energy -= damage;
             if(this.energy < 0){
                 this.energy = 0;
             } else {
                 this.lastHit = new Date().getTime();
             }
-
             this.lastHitTimeStamp = new Date().getTime();
         }
-
     }
 
     isHurt() {
@@ -80,7 +77,4 @@ class CollidableObject extends MovableObject {
     isAttackedByEndboss(){
         return this.attackedbyEndboss
     }
-
-
-
 }

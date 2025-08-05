@@ -25,6 +25,7 @@ class Character extends CollidableObject {
         'img/2_character_pepe/3_jump/J-38.png',
         'img/2_character_pepe/3_jump/J-39.png',
     ];
+
     IMAGES_DEAD = [
         'img/2_character_pepe/5_dead/D-51.png',
         'img/2_character_pepe/5_dead/D-52.png',
@@ -34,11 +35,13 @@ class Character extends CollidableObject {
         'img/2_character_pepe/5_dead/D-56.png',
         // 'img/2_character_pepe/5_dead/D-57.png',
     ];
+
     IMAGES_HURT = [
         'img/2_character_pepe/4_hurt/H-41.png',
         'img/2_character_pepe/4_hurt/H-42.png',
         'img/2_character_pepe/4_hurt/H-43.png',
     ];
+
     IMAGES_IDLE_SHORT = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
         'img/2_character_pepe/1_idle/idle/I-2.png',
@@ -51,6 +54,7 @@ class Character extends CollidableObject {
         'img/2_character_pepe/1_idle/idle/I-9.png',
         'img/2_character_pepe/1_idle/idle/I-10.png',
     ];
+
     IMAGES_IDLE_LONG = [
         'img/2_character_pepe/1_idle/long_idle/I-11.png',
         'img/2_character_pepe/1_idle/long_idle/I-12.png',
@@ -63,6 +67,7 @@ class Character extends CollidableObject {
         'img/2_character_pepe/1_idle/long_idle/I-19.png',
         'img/2_character_pepe/1_idle/long_idle/I-20.png',
     ];
+
     hitCharacterSound = new Audio('./audio/hit.mp3');
     throwSound = new Audio('./audio/throw.mp3');
     
@@ -101,54 +106,65 @@ class Character extends CollidableObject {
     }
 
     animate() {
+        this.setIntervalForCheckingInputedAction();
+        this.setIntervalForAnimation();
+    }
 
+    setIntervalForCheckingInputedAction(){
         setStoppableInterval(() => {
             if(!this.deathRegistered && this.world.endbossHealth){
                 if(this.isAttackedByEndboss()){
-                    this.pauseSnoringSound();
-                    this.moveLeft();
-                    if(this.world.keyboard.LEFT){
-                        this.otherDirection = true;
-                    }else if(this.world.keyboard.RIGHT){
-                        this.otherDirection = false;
-                    }
+                    this.moveCharacterLeftAfterAttackFromEndboss();
                 }else if(this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && this.x > this.world.level.level_start_x){
-                    this.pauseSnoringSound();
-                    this.moveLeft();
-                    this.otherDirection = true;
-
-                    this.setTimeStampForIdle();
+                    this.moveCharacterLeft();
                 }else if(this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && this.x < this.world.level.level_end_x){
-                    this.pauseSnoringSound();
-                    this.moveRight();
-                    this.otherDirection = false;
-
-                    this.setTimeStampForIdle();
+                    this.moveCharacterRight();
                 }
-
-                if(this.world.keyboard.SPACE && !this.isAboveGround()) {
-                    this.pauseSnoringSound();
-
-                    
-    
-                    
-                    setStoppableSound(this.jumpSound);
-                        
-
-                    this.jump(-12.5);
-
-                    this.setTimeStampForIdle();
-                }
-
-                if(!this.isAboveGround()){
-                    this.landedAfterHitByEndboss()
-                }       
-                
+                this.checkIfCharacterJumps();
                 this.world.camera_x = -this.x + 100;
             }
-
         }, 1000 / 60);
+    }
 
+    moveCharacterLeftAfterAttackFromEndboss(){
+        this.pauseSnoringSound();
+        this.moveLeft();
+        if(this.world.keyboard.LEFT){
+            this.otherDirection = true;
+        }else if(this.world.keyboard.RIGHT){
+            this.otherDirection = false;
+        }
+    }
+
+    moveCharacterLeft(){
+        this.pauseSnoringSound();
+        this.moveLeft();
+        this.otherDirection = true;
+        this.setTimeStampForIdle(); 
+    }
+
+    moveCharacterRight(){
+        this.pauseSnoringSound();
+        this.moveRight();
+        this.otherDirection = false;
+        this.setTimeStampForIdle();
+    }
+
+    checkIfCharacterJumps(){
+        if(this.world.keyboard.SPACE && !this.isAboveGround()) {
+            this.pauseSnoringSound();
+            setStoppableSound(this.jumpSound);
+                
+            this.jump(-12.5);
+            this.setTimeStampForIdle();
+        }
+
+        if(!this.isAboveGround()){
+            this.landedAfterHitByEndboss()
+        } 
+    }
+
+    setIntervalForAnimation(){
         setStoppableInterval(() => {
             if(this.isDead()){
                 this.playDeadAnimation();
@@ -158,19 +174,20 @@ class Character extends CollidableObject {
             }else if(this.isAboveGround()) {     
                 this.playAnimation(this.IMAGES_JUMPING, false);
             }else{
-                if(((this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) || (this.world.keyboard.LEFT && !this.world.keyboard.RIGHT)) && this.world.endbossHealth){
-                    this.playAnimation(this.IMAGES_WALKING);
-                }else if(this.checkIfTimeStampForLongIdle()){
-                    this.playAnimation(this.IMAGES_IDLE_LONG);
-                    
-                    
-                    setStoppableSound(this.snoringCharacterSound, 0.2);
-                        
-                }else{
-                    this.playAnimation(this.IMAGES_IDLE_SHORT);
-                }
+                this.playAnimationWalkOrIdle();
             }
         },  140); 
+    }
+
+    playAnimationWalkOrIdle(){
+        if(((this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) || (this.world.keyboard.LEFT && !this.world.keyboard.RIGHT)) && this.world.endbossHealth){
+            this.playAnimation(this.IMAGES_WALKING);
+        }else if(this.checkIfTimeStampForLongIdle()){
+            this.playAnimation(this.IMAGES_IDLE_LONG);    
+            setStoppableSound(this.snoringCharacterSound, 0.2);      
+        }else{
+            this.playAnimation(this.IMAGES_IDLE_SHORT);
+        }
     }
 
     setTimeStampForIdle(){
@@ -184,5 +201,4 @@ class Character extends CollidableObject {
     pauseSnoringSound(){
         this.snoringCharacterSound.pause();
     }
-
 }

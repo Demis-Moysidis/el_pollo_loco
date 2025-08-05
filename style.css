@@ -12,13 +12,10 @@ body {
     align-items: center;
     margin: 0;
     gap: 20px;
-
     background-image: linear-gradient(rgba(0,0,0,0.5)), url('./img/5_background/second_half_background.png');
     background-position: center;
     background-size: cover;
 }
-
-
 
 h1 {
     font-size: 80px;
@@ -41,28 +38,20 @@ canvas {
     background-image: url('img/9_intro_outro_screens/start/startscreen_2.png');
     background-size: contain;
     background-position: top;
-    background-repeat: no-repeat;
-
-    
-    
+    background-repeat: no-repeat;   
 }
 
-.canvas_fullsreen {
-    
+.canvas_fullsreen {  
     object-fit: contain;
     width: 100vw;
     max-height: 100vh;
 }
 
-
-
 .canvas_div {
     position: relative;
-
     display: flex;
     flex-direction: column;
     gap: 12px;
-
     align-items: center;
     justify-content: center;
 }
@@ -91,9 +80,7 @@ button{
    padding: 8px;
    font-size: 34px;
    transition: all 0.2s ease;
-
    background: linear-gradient(to bottom, #ff9900, #ffdd00, #ff9900);
-
    display: flex;
    align-items: center;
 }
@@ -106,6 +93,7 @@ button{
     align-items: center;
     justify-content: center;
     transition: none;
+    position: relative;
 }
 
 .button_circel_jump {
@@ -181,21 +169,15 @@ button:active {
 .info_game_description {
     position: absolute;
     top: 50%;
-    left: 50%;
-    
+    left: 50%; 
     transform: translate(-50%, -50%);
     width: 80%;
-
     padding: 20px;
     border-radius: 8px;
-
     font-size: 24px;
     color: #ff9900;
     background: rgba(0,0,0, 0.85);
-    
 }
-
-
 
 .info_game_description p {
     margin: 0;
@@ -209,7 +191,6 @@ button:active {
 
 .info_game_description_close img {
     width: 25px;
-    
 }
 
 .info_game_controls {
@@ -281,7 +262,7 @@ button:active {
     padding: 0 16px;
     box-sizing: border-box;
     position: absolute;
-    bottom: 5px;
+    bottom: 5px;  
 }
 
 .landscape_mode_hint {
@@ -318,7 +299,6 @@ button:active {
 }
 
 @media (hover: none) and (orientation: landscape){
-    
     .responsive_btns {
         display: flex;
     }
@@ -350,7 +330,6 @@ button:active {
         top:  50%;
         right: 10px;
     }
-
 
     .canvas_div {
         width: 100%;

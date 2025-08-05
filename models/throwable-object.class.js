@@ -17,7 +17,7 @@ class ThrowableObject extends CollidableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
-    ]
+    ];
 
     offset = {
         top: 20,
@@ -40,18 +40,15 @@ class ThrowableObject extends CollidableObject {
         this.width = 60;
         this.trow()
         this.animate();
-
     }
 
     trow() {
-        
         this.speedY = -10;
         this.applyGravity();
         setStoppableInterval(()=>{
             if(this.isAboveGround()){
                 this.moveRight()
             }
-            
         }, 25)
     }
 
@@ -60,7 +57,6 @@ class ThrowableObject extends CollidableObject {
     }
 
     animate(){
-
         setStoppableInterval(() => {
             if(this.isAboveGround()){  
                 this.playAnimation(this.IMAGES_ROTATION);

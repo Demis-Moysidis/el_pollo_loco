@@ -33,9 +33,8 @@ class StatusBar extends DrawableObject{
         'img/7_statusbars/2_statusbar_endboss/green/green60.png',
         'img/7_statusbars/2_statusbar_endboss/green/green80.png',
         'img/7_statusbars/2_statusbar_endboss/green/green100.png',
-    ]
+    ];
 
-    
     percentage;
     type;
 
@@ -50,7 +49,15 @@ class StatusBar extends DrawableObject{
         super();
         this.type = type;
         this.percentage = percentage;
+        this.checkStatusBarType();
+        this.x = x;
+        this.y = y;
+        this.width = 225;
+        this.height = 60;
+        this.setPercentage(this.percentage);
+    };
 
+    checkStatusBarType(){
         if(type == 'character_health'){
             this.loadImages(this.IMAGES_CHARACTER_HEALTH);
         }else if(type == 'character_bottle'){
@@ -60,22 +67,13 @@ class StatusBar extends DrawableObject{
         }else if(type == 'endboss_health'){
             this.loadImages(this.IMAGES_ENDBOSS_HEALTH)
         }
-        
-        this.x = x;
-        this.y = y;
-        
-        this.width = 225;
-        this.height = 60;
-
-        
-        this.setPercentage(this.percentage);
     }
 
     setPercentage(percentage, type = this.type) {
         this.percentage = percentage;
         let path = this.types[type][this.resolveImageIndex()];
         this.img = this.imageCache[path];
-    }
+    };
 
     resolveImageIndex(){
         if(this.percentage == 100){
@@ -91,7 +89,7 @@ class StatusBar extends DrawableObject{
         } else {
             return 0;
         }
-    }
+    };
 
     flyIn(){
         setStoppableInterval(() => {
@@ -99,7 +97,5 @@ class StatusBar extends DrawableObject{
                 this.y += 1
             }
         }, 1000 / 60)
-    }
-
-
+    };
 }

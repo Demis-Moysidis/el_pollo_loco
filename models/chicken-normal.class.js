@@ -7,9 +7,10 @@ class ChickenNormal extends CollidableObject {
                       './img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
                       './img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
     ];
+
     IMAGES_DEAD =[
         'img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
-    ]
+    ];
 
     hitChickenSound = new Audio('./audio/chicken.mp3');
 
@@ -20,7 +21,6 @@ class ChickenNormal extends CollidableObject {
         right: 10
     }
     
-
     constructor(startRangeX) {
         super();
         this.loadImage('./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
@@ -33,16 +33,13 @@ class ChickenNormal extends CollidableObject {
         this.animate();
         this.setLastY();
     }
- 
 
     animate() {
         setStoppableInterval(() => {
             if(!this.isDead()){
                 this.moveLeft();
-            }
-            
+            } 
         }, 1000 / 60);
-
 
         setStoppableInterval(() => {
             if(!this.isDead()){

@@ -4,10 +4,6 @@ class CollectableBottle extends CollectableObject {
     width = 60;
     height = 60;
 
-    // IMAGE_ONE_BOTTLE = [
-    //     'img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
-    // ];
-
     collectedBottleSound = new Audio('./audio/collected_bottle.mp3');
 
     offset = {
@@ -19,7 +15,6 @@ class CollectableBottle extends CollectableObject {
 
     constructor(startX, endX){
         super();
-
         this.x = startX + endX * Math.random();
         
         if(Math.random() > 0.5){
@@ -27,20 +22,6 @@ class CollectableBottle extends CollectableObject {
         }else{
             this.loadImage('img/6_salsa_bottle/2_salsa_bottle_on_ground.png');
         }
-
-        
-        
-        
-        // this.loadImages(this.IMAGES_COIN);
-
-        // this.animate();
     }
-
-    // animate(){
-    //     this.animationId = setStoppableInterval(() => {
-    //         this.playAnimation(this.IMAGES_COIN)
-    //     }, 600)
-    // }
-
 }
 

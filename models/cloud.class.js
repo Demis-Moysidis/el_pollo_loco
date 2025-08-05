@@ -10,20 +10,15 @@ class Cloud extends MovableObject {
             this.loadImage('./img/5_background/layers/4_clouds/2.png');
         }
         
-
         this.x = startRangeX + (Math.random() * 100);
         this.y = Math.random() * 30;
-
         this.speed = 0.10 + (Math.random() * 0.10);
         this.animate();
-        
     }
 
     animate() {
         setStoppableInterval(()=>{
             this.moveLeft();
-        }, 1000 / 60);
-        
+        }, 1000 / 60); 
     }
-
 }

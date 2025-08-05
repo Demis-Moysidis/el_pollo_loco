@@ -6,21 +6,16 @@ class MovableObject extends DrawableObject {
     acceleration = 1;
     touchesTheGround;
     
-    
-
-
     applyGravity() {
         setStoppableInterval( () => {
             if(this.isAboveGround() || this.speedY < 0){
                 if(this.y + this.speedY > this.touchesTheGround){
                     this.y = this.touchesTheGround;
-                    
                 }else{
                     this.y += this.speedY;
                     this.speedY += this.acceleration; 
                 }
             }
-
         }, 1000 / 25)
     }
 
@@ -42,17 +37,14 @@ class MovableObject extends DrawableObject {
     }
 
     playAnimation(images, loop=true) {
-        
         let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
 
         if(!loop && this.currentImage >= images.length){
-    
             let path = images[images.length - 1];
-            this.img = this.imageCache[path];
-             
+            this.img = this.imageCache[path]; 
         }
     }
 }
