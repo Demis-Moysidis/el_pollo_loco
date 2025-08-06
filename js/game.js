@@ -3,7 +3,6 @@ let ctx;
 let world;
 let keyboard = new Keyboard();
 
-let firstActivationOfMainSound = true;
 let fullScreen = false;
 let leaveInfoWindow = false;
 
@@ -11,6 +10,7 @@ function init() {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
     avoidFocusTracking();
+    initSound();
 }
 
 function startGame(){
@@ -22,6 +22,8 @@ function startGame(){
 
     resumeInterval();
     document.getElementById('canvas').classList.toggle('canvas_fullsreen_bg');
+
+    setStoppableSound(mainSound);
 }
 
 function playAgain(){
@@ -52,8 +54,8 @@ function cancelGame(){
 
     resumeInterval();    
     endbossSound.pause();
+    mainSound.pause();
     world?.character.pauseSnoringSound();
-    setStoppableSound(mainSound);
     document.getElementById('canvas').classList.toggle('canvas_fullsreen_bg');
 }
 
@@ -104,24 +106,6 @@ function infoGame(){
     
     leaveInfoWindow = !leaveInfoWindow
     document.getElementById('info_game_description').classList.toggle('d_none');
-}
-
-function musicToggle(){
-    document.getElementById('music_off').classList.toggle('d_none');
-    document.getElementById('music_note').classList.toggle('d_none');
-
-    if(soundOn){
-        setSoundOff();
-        runningAudios.forEach(audio => audio.muted = true);
-    }else{
-        setSoundOn();
-        runningAudios.forEach(audio => audio.muted = false);   
-    }
-
-    if(firstActivationOfMainSound){
-        setStoppableSound(mainSound);
-        firstActivationOfMainSound = false;
-    }
 }
 
 function fullscreenToggle(){
