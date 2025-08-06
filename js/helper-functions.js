@@ -31,3 +31,13 @@ function avoidFocusTracking(){
     });
 }
 
+function recognizeFullscreenChange(){
+    document.addEventListener('fullscreenchange', () => {   
+        if(!document.fullscreenElement && !toggeledFullscreenByUser){
+            fullscreenToggle();
+        }else{
+            toggeledFullscreenByUser = false;
+        }
+    })
+}
+

@@ -5,11 +5,13 @@ let keyboard = new Keyboard();
 
 let fullScreen = false;
 let leaveInfoWindow = false;
+let toggeledFullscreenByUser = false;
 
 function init() {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
     avoidFocusTracking();
+    recognizeFullscreenChange();
     initSound();
 }
 
@@ -22,7 +24,6 @@ function startGame(){
 
     resumeInterval();
     document.getElementById('canvas').classList.toggle('canvas_fullsreen_bg');
-
     setStoppableSound(mainSound);
 }
 
@@ -36,7 +37,6 @@ function playAgain(){
     resumeInterval();
     wonGameSound.pause();
     endbossSound.pause();
-    
     setStoppableSound(mainSound);
     document.getElementById('canvas').classList.toggle('canvas_fullsreen_bg');
 }
@@ -108,17 +108,23 @@ function infoGame(){
     document.getElementById('info_game_description').classList.toggle('d_none');
 }
 
+function toggleFullscreenByUser(){
+    toggeledFullscreenByUser = true;
+    fullscreenToggle();
+}
+
 function fullscreenToggle(){
     toggleElementsForFullscreen();
 
     if(fullScreen){
-        document.exitFullscreen();
+        if(document.fullscreenElement){
+            document.exitFullscreen();
+        }
         fullScreen = false;
     }else{
         document.getElementById('canvas_div').requestFullscreen();
         fullScreen = true;
     }
-
 }
 
 function toggleElementsForFullscreen(){
