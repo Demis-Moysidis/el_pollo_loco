@@ -2,7 +2,7 @@ let intervalIds = [];
 let isPaused = false;
 
 /**
- * @description Helper function for setting intervals.
+ * Helper function for setting intervals.
  * @returns {void} 
  * */
 function setStoppableInterval(fn, time) {
@@ -16,7 +16,7 @@ function setStoppableInterval(fn, time) {
 }
 
 /**
- * @description Helper function for clearing intervals.
+ * Helper function for clearing intervals.
  * @return {void}
  */
 function pauseInterval() {
@@ -24,7 +24,7 @@ function pauseInterval() {
 }
 
 /**
- * @description Helper function for resuming intervals.
+ * Helper function for resuming intervals.
  * @return {void}
  */
 function resumeInterval() {
@@ -32,7 +32,7 @@ function resumeInterval() {
 }
 
 /**
- * @description Helper function to clear all intervals.
+ * Helper function to clear all intervals.
  * @returns {void}
  */
 function stopGameByIntervals() {
@@ -40,7 +40,7 @@ function stopGameByIntervals() {
 }
 
 /**
- * @description Helper function to avoid focus tracking.
+ * Helper function to avoid focus tracking.
  * @returns {void}
  */
 function avoidFocusTracking(){
@@ -52,7 +52,7 @@ function avoidFocusTracking(){
 }
 
 /**
- * @description Helper function to recognize fullscreen change.
+ * Helper function to recognize fullscreen change.
  * @returns {void}
  */
 function recognizeFullscreenChange(){

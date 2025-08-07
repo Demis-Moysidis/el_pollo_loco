@@ -8,7 +8,7 @@ let leaveInfoWindow = false;
 let toggeledFullscreenByUser = false;
 
 /**
- * @description Initializes the game environment.
+ * Initializes the game environment.
  * @returns {void}
  */
 function init() {
@@ -21,7 +21,7 @@ function init() {
 }
 
 /**
- * @description Initializes the game level and starts the game.
+ * Initializes the game level and starts the game.
  * @returns {void}
  */
 function startGame(){
@@ -37,7 +37,7 @@ function startGame(){
 }
 
 /**
- * @description Initializes the game level.
+ * Initializes the game level.
  * @returns {void}
  */
 function playAgain(){
@@ -55,7 +55,7 @@ function playAgain(){
 }
 
 /**
- * @description Cancels the current game, stops all intervals and clears the canvas.
+ * Cancels the current game, stops all intervals and clears the canvas.
  * @returns {void}
  */
 function cancelGame(){
@@ -77,7 +77,7 @@ function cancelGame(){
 }
 
 /**
- * @description Toggles the visibility of the pause and cancel game buttons.
+ * Toggles the visibility of the pause and cancel game buttons.
  * @returns {void}      
  * */
 function togglePauseAndCancelBtn(){
@@ -86,7 +86,7 @@ function togglePauseAndCancelBtn(){
 }
 
 /**
- * @description Stops the game and shows the lost screen.
+ * Stops the game and shows the lost screen.
  * @returns {void}
  */
 function lostGame(){
@@ -101,7 +101,7 @@ function lostGame(){
 }
 
 /**
- * @description Stops the game and shows the won screen.
+ * Stops the game and shows the won screen.
  * @returns {void}
  */
 function wonGame(){
@@ -115,7 +115,7 @@ function wonGame(){
 }
 
 /** 
- * @description Pauses or resumes the game based on the current state.
+ * Pauses or resumes the game based on the current state.
  * Toggles the visibility of the pause and run game buttons.
  * @returns {void}
  */
@@ -132,7 +132,7 @@ function pauseGame(){
 }
 
 /**
- * @description Toggles the visibility of the info game description.
+ * Toggles the visibility of the info game description.
  * @returns {void}
  */
 function infoGame(){
@@ -147,7 +147,7 @@ function infoGame(){
 }
 
 /**
- * @description Toggles the fullscreen mode of the game.
+ * Toggles the fullscreen mode of the game.
  * @returns {void}
  */
 function toggleFullscreenByUser(){
@@ -156,7 +156,7 @@ function toggleFullscreenByUser(){
 }
 
 /**
- * @description Toggles the fullscreen mode of the game.
+ * Toggles the fullscreen mode of the game.
  * @returns {void}
  */
 function fullscreenToggle(){
@@ -174,7 +174,7 @@ function fullscreenToggle(){
 }
 
 /**
- * @description Toggles the according elements for fullscreen.
+ * Toggles the according elements for fullscreen.
  * @returns {void}
  */
 function toggleElementsForFullscreen(){
@@ -189,7 +189,7 @@ function toggleElementsForFullscreen(){
 }
 
 /**
- * @description Monitors keyboard input for game controls.  
+ * Monitors keyboard input for game controls.  
  * @returns {void}
  */
 function monitorInputKeys(){

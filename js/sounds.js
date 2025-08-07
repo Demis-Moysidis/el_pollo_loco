@@ -11,7 +11,7 @@ const gameOverSound = new Audio('./audio/game_over.mp3');
 const wonGameSound = new Audio('./audio/won.mp3');
 
 /**
- * @description Initializes sound settings.
+ * Initializes sound settings.
  * @return {void}
  */
 function initSound() {
@@ -23,7 +23,7 @@ function initSound() {
 }
 
 /**
- * @description Helper function for setting stoppable sound.
+ * Helper function for setting stoppable sound.
  * @param {Audio} sound - The audio object to be played.
  * @param {number} [volume=0.1] - The volume level for the sound.
  * @param {boolean} [resetTime=false] - Whether to reset the sound's current time to 0.
@@ -48,7 +48,7 @@ function setStoppableSound(sound, volume=0.1, resetTime=false){
 }
 
 /**
- * @description Toggles sound on and off.
+ * Toggles sound on and off.
  * @returns {void}
  */
 function soundToggle(){
@@ -65,7 +65,7 @@ function soundToggle(){
 }
 
 /**
- * @description Sets sound status to on.
+ * Sets sound status to on.
  * @returns {void} 
  */
 function setSoundOn() {
@@ -74,7 +74,7 @@ function setSoundOn() {
 }
 
 /**
- * @description Sets sound status to off.
+ * Sets sound status to off.
  * @return {void}
  */
 function setSoundOff() {

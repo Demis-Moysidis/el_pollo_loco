@@ -1,5 +1,5 @@
 /**
- * @description Monitors responsive controls for touch devices.
+ * Monitors responsive controls for touch devices.
  * @returns {void}
  */
 (function monitorResponsiveControls() {
