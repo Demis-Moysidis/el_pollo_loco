@@ -34,18 +34,26 @@ h3 {
 }
 
 a {
-    color: #9a3a17;
+    color: #ff9900;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: 28px;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 canvas {
     background-image: url('img/9_intro_outro_screens/start/startscreen_2.png');
     background-size: contain;
-    background-position: top;
+    background-position: center;
     background-repeat: no-repeat;   
 }
 
@@ -66,13 +74,13 @@ canvas {
 
 .lost_game {
     background-size: auto 47%, contain;
-    background-position: center 50%, top;
+    background-position: center 65%, center;
     background-image: url('img/You won, you lost/You lost.png'), url('img/5_background/first_half_background.png');
 }
 
 .won_game {
     background-size: auto 70%, contain;
-    background-position: center 35%, top;
+    background-position: center 70%, center;
     background-image: url('img/You won, you lost/You won A.png'), url('img/5_background/first_half_background.png');
 }
 
@@ -132,12 +140,12 @@ button:active {
 .start_game_btn {
     position: absolute;
     left: 50%;
-    top: 6%;
+    top: 15%;
     transform: translateX(-50%);
 }
 
 .play_again_top {
-    top: 9%;
+    top: 18%;
 }
 
 .cancel_game_btn {
@@ -351,6 +359,10 @@ button:active {
 
     .info_game_description{
         font-size: 20px;
+    }
+
+    a {
+        display: none;
     }
 }
 

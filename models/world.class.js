@@ -100,7 +100,7 @@ class World {
     };
 
     checkThrowObjects() {
-        if(this.keyboard.D && !this.character.deathRegistered && this.endbossHealth && this.checkLastThrowenObjectTime() && this.bottlePercentage > 0){ 
+        if(this.keyboard.D && !this.character.deathRegistered && this.endbossHealth && this.checkLastThrowenObjectTime() && this.bottlePercentage > 0 && !this.character.otherDirection){ 
             let bottle = new ThrowableObject(this.character.x + 65, this.character.y + 100);
             this.throwableObjects.push(bottle);
             

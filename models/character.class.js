@@ -15,8 +15,6 @@ class Character extends CollidableObject {
     ];
 
     IMAGES_JUMPING = [
-        // 'img/2_character_pepe/3_jump/J-31.png',
-        // 'img/2_character_pepe/3_jump/J-32.png',
         'img/2_character_pepe/3_jump/J-33.png',
         'img/2_character_pepe/3_jump/J-34.png',
         'img/2_character_pepe/3_jump/J-35.png',
@@ -33,7 +31,6 @@ class Character extends CollidableObject {
         'img/2_character_pepe/5_dead/D-54.png',
         'img/2_character_pepe/5_dead/D-55.png',
         'img/2_character_pepe/5_dead/D-56.png',
-        // 'img/2_character_pepe/5_dead/D-57.png',
     ];
 
     IMAGES_HURT = [
