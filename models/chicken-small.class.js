@@ -1,5 +1,8 @@
-class ChickenSmall extends CollidableObject {
-    
+/**
+ * Represents a chicken that is smaller than the normal chicken.
+ * @extends CollidableObject
+ */
+class ChickenSmall extends CollidableObject {  
     y = 378;
     height = 50;
     width = 50;
@@ -37,6 +40,10 @@ class ChickenSmall extends CollidableObject {
         this.setLastY();
     }
 
+    /**
+     * Sets up the animation for the small chicken.
+     * @returns {void}
+     */
     animate() {
         setStoppableInterval(() => {
             if(!this.isDead()){
@@ -60,6 +67,10 @@ class ChickenSmall extends CollidableObject {
         }, 150) 
     }
 
+    /**
+     * Returns a random time for the jump animation.
+     * @returns {number} - A random time between 2000 and 5000 milliseconds.
+     */
     getTimeForJumpAnimation(){
         return 2000 + Math.random() * 3000
     }

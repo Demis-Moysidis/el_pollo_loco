@@ -1,3 +1,7 @@
+/**
+ * Represents the main player character.
+ * @extends CollidableObject
+ */
 class Character extends CollidableObject {
 
     x = 120;
@@ -102,11 +106,19 @@ class Character extends CollidableObject {
         this.setLastY();
     }
 
+    /**
+     * Sets up the animation for the character.
+     * @returns {void}
+     */
     animate() {
         this.setIntervalForCheckingInputedAction();
         this.setIntervalForAnimation();
     }
 
+    /**
+     * Sets up an interval to check for keyboard input and character actions.
+     * @returns {void}
+     */
     setIntervalForCheckingInputedAction(){
         setStoppableInterval(() => {
             if(!this.deathRegistered && this.world.endbossHealth){
@@ -123,6 +135,10 @@ class Character extends CollidableObject {
         }, 1000 / 60);
     }
 
+    /**
+     * Moves the character left after being attacked by the endboss.
+     * @returns {void}
+     */
     moveCharacterLeftAfterAttackFromEndboss(){
         this.pauseSnoringSound();
         this.moveLeft();
@@ -133,6 +149,10 @@ class Character extends CollidableObject {
         }
     }
 
+    /**
+     * Moves the character to the left.
+     * @returns {void}
+     */
     moveCharacterLeft(){
         this.pauseSnoringSound();
         this.moveLeft();
@@ -140,6 +160,10 @@ class Character extends CollidableObject {
         this.setTimeStampForIdle(); 
     }
 
+    /**
+     * Moves the character to the right.
+     * @returns {void}
+     */
     moveCharacterRight(){
         this.pauseSnoringSound();
         this.moveRight();
@@ -147,6 +171,10 @@ class Character extends CollidableObject {
         this.setTimeStampForIdle();
     }
 
+    /**
+     * Checks if the character jumps.
+     * @returns {void}
+     */
     checkIfCharacterJumps(){
         if(this.world.keyboard.SPACE && !this.isAboveGround()) {
             this.pauseSnoringSound();
@@ -161,6 +189,10 @@ class Character extends CollidableObject {
         } 
     }
 
+    /**
+     * Sets up an interval for character animations.
+     * @returns {void}
+     */
     setIntervalForAnimation(){
         setStoppableInterval(() => {
             if(this.isDead()){
@@ -176,6 +208,10 @@ class Character extends CollidableObject {
         },  140); 
     }
 
+    /**
+     * Plays the walk or idle animation based on keyboard input.
+     * @returns {void}
+     */
     playAnimationWalkOrIdle(){
         if(((this.world.keyboard.RIGHT && !this.world.keyboard.LEFT) || (this.world.keyboard.LEFT && !this.world.keyboard.RIGHT)) && this.world.endbossHealth){
             this.playAnimation(this.IMAGES_WALKING);
@@ -187,14 +223,26 @@ class Character extends CollidableObject {
         }
     }
 
+    /**
+     * Sets the last time stamp for idle.
+     * @returns {void}
+     */
     setTimeStampForIdle(){
         this.timeStampForIdle = new Date().getTime();
     }
 
+    /**
+     * Checks if the time since the last idle is greater than 5 seconds.
+     * @returns {boolean} - True if more than 5 seconds have passed, false otherwise.
+     */
     checkIfTimeStampForLongIdle(){
         return new Date().getTime() - this.timeStampForIdle > 5000;
     }
 
+    /**
+     * Pauses the snoring sound.
+     * @returns {void}
+     */
     pauseSnoringSound(){
         this.snoringCharacterSound.pause();
     }

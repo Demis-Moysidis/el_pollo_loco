@@ -1,3 +1,6 @@
+/**
+ * Represents a drawable object in the game.
+ */
 class DrawableObject {
     x;
     y;
@@ -7,11 +10,21 @@ class DrawableObject {
     imageCache = {};
     currentImage = 0;
 
+    /**
+     * Loads an image from the specified path.
+     * @param {string} path - The path to the image.
+     * @returns {void}
+     */
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
     }
 
+    /**
+     * Loads multiple images from the specified array of paths.
+     * @param {string[]} arr - An array of image paths.
+     * @returns {void}
+     */
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
@@ -20,10 +33,20 @@ class DrawableObject {
         });
     }
 
+    /**
+     * Draws the current image of the drawable object onto the canvas.
+     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+     * @return {void}
+     */
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
+    /**
+     * Draws Frame for the drawable object, including borders for debugging.
+     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+     * @return {void}
+     */
     drawFrame(ctx) {
         if(this instanceof Character || 
            this instanceof ChickenNormal || 
@@ -38,6 +61,11 @@ class DrawableObject {
         }
     }
 
+    /**
+     * Draws a red border around the drawable object for debugging.
+     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+     * @return {void}
+     */
     drawRedBorder(ctx) {
         ctx.beginPath();
         ctx.lineWidth = '5';
@@ -50,6 +78,11 @@ class DrawableObject {
         ctx.stroke();
     }
 
+    /**
+     * Draws a blue border around the drawable object for debugging.
+     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+     * @return {void}
+     */
     drawBlueBorder(ctx) {
         ctx.beginPath();
         ctx.lineWidth = '5';

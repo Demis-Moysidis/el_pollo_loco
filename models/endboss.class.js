@@ -1,3 +1,7 @@
+/**
+ * Represents a end boss in the game.
+ * @extends CollidableObject
+ */
 class Endboss extends CollidableObject {
     height = 225;
     width = 175;
@@ -67,6 +71,10 @@ class Endboss extends CollidableObject {
         this.x = 4300;
     }
 
+    /**
+     * Animates the end boss by setting up intervals for walking, attacking, and playing animations.
+     * @returns {void}
+     */
     animate() {
         this.setIntervalForPlayingAnimation();
         this.setIntervalForCheckingAction();
@@ -74,6 +82,10 @@ class Endboss extends CollidableObject {
         this.setAttackingIntervals();
     };
 
+    /**
+     * Sets up an interval for playing the end boss's animations.
+     * @returns {void}
+     */
     setIntervalForPlayingAnimation(){
         setStoppableInterval( () => {
             if(this.isDead()){
@@ -91,6 +103,10 @@ class Endboss extends CollidableObject {
         }, 140)
     }
 
+    /**
+     * Sets up an interval for checking the end boss's actions, such as walking or jumping.
+     * @returns {void}
+     */
     setIntervalForCheckingAction(){
         setStoppableInterval(() => {
             if((this.checkWalkingTime() || this.isAboveGround()) && !this.isDead()){
@@ -104,6 +120,10 @@ class Endboss extends CollidableObject {
         }, 1000 /60)
     }
 
+    /**
+     * Sets up intervals for the end boss's attacking actions.
+     * @returns {void}
+     */
     setAttackingIntervals(){
         setStoppableInterval( () => {
             if(!this.isDead()){
@@ -114,12 +134,20 @@ class Endboss extends CollidableObject {
         }, 5000)
     };
 
+    /**
+     * Sets up intervals for the end boss's walking actions.
+     * @returns {void}
+     */
     setWalkingIntervals(){
         setStoppableInterval( () => {
             this.endbossWalkTimeStamp = new Date().getTime();
         }, 3000)
     };
 
+    /**
+     * Checks if the end boss is currently walking.
+     * @returns {boolean} - True if the end boss is walking, false otherwise.
+     */
     checkWalkingTime(){
        return new Date().getTime() - this.endbossWalkTimeStamp < 1000
     };

@@ -1,3 +1,7 @@
+/**
+ * Represents a throwable object in the game.
+ * @extends CollidableObject
+ */
 class ThrowableObject extends CollidableObject {
 
     touchesTheGround = 385;
@@ -42,6 +46,10 @@ class ThrowableObject extends CollidableObject {
         this.animate();
     }
 
+    /**
+     * Throws the object upwards and applies gravity.
+     * @returns {void}
+     */
     trow() {
         this.speedY = -10;
         this.applyGravity();
@@ -52,10 +60,18 @@ class ThrowableObject extends CollidableObject {
         }, 25)
     }
 
+    /**
+     * Returns if the object is equal to the ground.
+     * @returns {boolean} - True if the object is equal to the ground, false otherwise.
+     */
     isEqualToTheGround() {
         return this.y == this.touchesTheGround;
     }
 
+    /**
+     * Animates the throwable object by playing the rotation or splash animation based on its state.
+     * @returns {void}
+     */
     animate(){
         setStoppableInterval(() => {
             if(this.isAboveGround()){  
@@ -69,10 +85,18 @@ class ThrowableObject extends CollidableObject {
         }, 100)
     }
 
+    /**
+     * Checks if the bottle has already splashed.
+     * @return {boolean} - True if the bottle has already splashed, false otherwise.
+     */
     isBottleAlreadySplashed(){
         return this.bottleAlreadySplashed
     }
 
+    /**
+     * Sets the bottle as already splashed.
+     * @returns {void}
+     */
     setBottleAlreadySplashed(){
         this.bottleAlreadySplashed = true;
     }

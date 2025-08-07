@@ -1,3 +1,7 @@
+/**
+ * Represents a coin in the game.
+ * @extends CollectableObject
+ */
 class Coin extends CollectableObject {
 
     x;
@@ -28,6 +32,10 @@ class Coin extends CollectableObject {
         this.animate();
     }
 
+    /**
+     * Sets up the animation for the coin.
+     * @returns {void}
+     */
     animate(){
         this.animationId = setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_COIN)

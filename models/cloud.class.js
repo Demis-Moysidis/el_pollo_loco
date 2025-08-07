@@ -1,3 +1,7 @@
+/**
+ * Represents a cloud in the game.
+ * @extends MovableObject
+ */
 class Cloud extends MovableObject {
     width = 500;
     height = 250;
@@ -16,6 +20,10 @@ class Cloud extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Sets up the animation for the cloud.
+     * @returns {void}
+     */
     animate() {
         setStoppableInterval(()=>{
             this.moveLeft();

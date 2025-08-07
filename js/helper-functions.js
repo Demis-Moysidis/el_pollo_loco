@@ -1,6 +1,10 @@
 let intervalIds = [];
 let isPaused = false;
 
+/**
+ * @description Helper function for setting intervals.
+ * @returns {void} 
+ * */
 function setStoppableInterval(fn, time) {
     let id = setInterval(() => {
         if(!isPaused){
@@ -11,18 +15,34 @@ function setStoppableInterval(fn, time) {
     return id
 }
 
+/**
+ * @description Helper function for clearing intervals.
+ * @return {void}
+ */
 function pauseInterval() {
   isPaused = true;
 }
 
+/**
+ * @description Helper function for resuming intervals.
+ * @return {void}
+ */
 function resumeInterval() {
   isPaused = false;
 }
 
+/**
+ * @description Helper function to clear all intervals.
+ * @returns {void}
+ */
 function stopGameByIntervals() {
     intervalIds.forEach(clearInterval);
 }
 
+/**
+ * @description Helper function to avoid focus tracking.
+ * @returns {void}
+ */
 function avoidFocusTracking(){
     document.querySelectorAll('button').forEach(button => {
         button.addEventListener('click', (e) => {
@@ -31,6 +51,10 @@ function avoidFocusTracking(){
     });
 }
 
+/**
+ * @description Helper function to recognize fullscreen change.
+ * @returns {void}
+ */
 function recognizeFullscreenChange(){
     document.addEventListener('fullscreenchange', () => {   
         if(!document.fullscreenElement && !toggeledFullscreenByUser){
@@ -40,4 +64,3 @@ function recognizeFullscreenChange(){
         }
     })
 }
-

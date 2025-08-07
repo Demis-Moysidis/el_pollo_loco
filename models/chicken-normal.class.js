@@ -1,3 +1,7 @@
+/**
+ * Represents a collidable object in the game.
+ * @extends CollidableObject
+ */
 class ChickenNormal extends CollidableObject {
     
     y = 355;
@@ -34,6 +38,10 @@ class ChickenNormal extends CollidableObject {
         this.setLastY();
     }
 
+    /**
+     * Sets up the animation for the collidable object.
+     * @returns {void}
+     */
     animate() {
         setStoppableInterval(() => {
             if(!this.isDead()){

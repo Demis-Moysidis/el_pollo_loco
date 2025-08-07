@@ -1,3 +1,6 @@
+/**
+ * Represents a level in the game.
+ */
 class Level {
     enemies;
     clouds;

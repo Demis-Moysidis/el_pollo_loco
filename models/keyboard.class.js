@@ -1,3 +1,6 @@
+/**
+ * Represents a keyboard input handler for the game.
+ */
 class Keyboard {
     LEFT = false;
     RIGHT = false;

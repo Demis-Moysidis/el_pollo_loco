@@ -1,3 +1,7 @@
+/**
+ * Represents a background object in the game.
+ * @extends MovableObject
+ */
 class BackgroundObject extends MovableObject {
     width = 720;
     height = 480;
@@ -13,6 +17,10 @@ class BackgroundObject extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Sets up the animation for the background object.
+     * @returns {void}
+     */
     animate(){
         setStoppableInterval(() => {
             if(this.world && !this.world.character.deathRegistered && this.world.endbossHealth){
@@ -22,9 +30,13 @@ class BackgroundObject extends MovableObject {
                     this.moveCorrespondingLayer();
                 }    
             }
-        }, 1000 / 30 )
+        }, 1000 / 60 )
     }
 
+    /**
+     * Moves the background object based on keyboard input.
+     * @returns {void}
+     */
     moveCorrespondingLayer(){
         if(this.world.keyboard.RIGHT && !this.world.keyboard.LEFT && this.layer == 3 && this.world.character.x < this.world.level.level_end_x){        
             this.moveRightLayerTree();     
@@ -37,6 +49,10 @@ class BackgroundObject extends MovableObject {
         }
     }
 
+    /**
+     * Checks which layer should be moved based on the current layer.
+     * @returns {void}
+     */
     checkWhichLeyerHasToMove(){
         if(this.layer == 3){
             this.moveLeftLayerTree(); 
@@ -45,17 +61,34 @@ class BackgroundObject extends MovableObject {
         }  
     }
 
+    /**
+     * Moves the background object to the left in layer two.
+     * @returns {void}
+     */
     moveLeftLayerTwo(){
         this.x -= 1;
     }
+
+    /**
+     * Moves the background object to the right in layer two.
+     * @returns {void}
+     */
     moveRightLayerTwo(){
         this.x += 1;
     }
 
+    /**
+     * Moves the background object to the left in layer three.
+     * @returns {void}
+     */
     moveLeftLayerTree(){
         this.x -= 2;
     }
 
+    /**
+     * Moves the background object to the right in layer three.
+     * @returns {void}
+     */
     moveRightLayerTree(){
         this.x += 2;
     }

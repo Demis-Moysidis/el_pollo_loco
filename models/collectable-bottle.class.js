@@ -1,3 +1,7 @@
+/**
+ * Represents a collectable bottle in the game.
+ * @extends CollectableObject
+ */
 class CollectableBottle extends CollectableObject {
     x;
     y = 368;

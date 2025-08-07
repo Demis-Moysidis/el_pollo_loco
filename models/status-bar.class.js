@@ -1,3 +1,7 @@
+/**
+ * Represents a status bar in the game.
+ * @extends DrawableObject
+ */
 class StatusBar extends DrawableObject{
     IMAGES_CHARACTER_HEALTH = [
         'img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
@@ -57,6 +61,11 @@ class StatusBar extends DrawableObject{
         this.setPercentage(this.percentage);
     };
 
+    /**
+     * Checks the type of the status bar and loads the corresponding images.
+     * @param {string} type - The type of the status bar.
+     * @returns {void}
+     */
     checkStatusBarType(type){
         if(type == 'character_health'){
             this.loadImages(this.IMAGES_CHARACTER_HEALTH);
@@ -69,12 +78,21 @@ class StatusBar extends DrawableObject{
         }
     }
 
-    setPercentage(percentage, type = this.type) {
+    /**
+     * Sets the percentage of the status bar and updates the image based on the percentage.
+     * @param {number} percentage - The percentage to set for the status bar.
+     * @returns {void}
+     */
+    setPercentage(percentage) {
         this.percentage = percentage;
-        let path = this.types[type][this.resolveImageIndex()];
+        let path = this.types[this.type][this.resolveImageIndex()];
         this.img = this.imageCache[path];
     };
 
+    /**
+     * Resolves the image index based on the current percentage.
+     * @returns {number} - The index of the image to be used.
+     */
     resolveImageIndex(){
         if(this.percentage == 100){
             return 5;
@@ -91,6 +109,10 @@ class StatusBar extends DrawableObject{
         }
     };
 
+    /**
+     * Fly in animation for the status bar.
+     * @returns {void}
+     */
     flyIn(){
         setStoppableInterval(() => {
             if(this.y < 7){

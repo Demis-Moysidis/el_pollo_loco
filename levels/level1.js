@@ -1,5 +1,9 @@
 let level1;
 
+/**
+ * @description Initializes level 1 with various game objects including enemies, collectibles, clouds, and background objects.
+ * @returns {void}
+ */
 function initLevel(){
     level1 = new Level([
             new ChickenNormal(700),

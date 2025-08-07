@@ -7,14 +7,23 @@ let fullScreen = false;
 let leaveInfoWindow = false;
 let toggeledFullscreenByUser = false;
 
+/**
+ * @description Initializes the game environment.
+ * @returns {void}
+ */
 function init() {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
     avoidFocusTracking();
     recognizeFullscreenChange();
     initSound();
+    monitorInputKeys();
 }
 
+/**
+ * @description Initializes the game level and starts the game.
+ * @returns {void}
+ */
 function startGame(){
     initLevel();
     world = new World(canvas, keyboard);
@@ -27,6 +36,10 @@ function startGame(){
     setStoppableSound(mainSound);
 }
 
+/**
+ * @description Initializes the game level.
+ * @returns {void}
+ */
 function playAgain(){
     initLevel();
     world = new World(canvas, keyboard);
@@ -41,6 +54,10 @@ function playAgain(){
     document.getElementById('canvas').classList.toggle('canvas_fullsreen_bg');
 }
 
+/**
+ * @description Cancels the current game, stops all intervals and clears the canvas.
+ * @returns {void}
+ */
 function cancelGame(){
     stopGameByIntervals();
     cancelAnimationFrame(world.animationFrame);
@@ -59,11 +76,19 @@ function cancelGame(){
     document.getElementById('canvas').classList.toggle('canvas_fullsreen_bg');
 }
 
+/**
+ * @description Toggles the visibility of the pause and cancel game buttons.
+ * @returns {void}      
+ * */
 function togglePauseAndCancelBtn(){
     document.getElementById('cancel_game_btn').classList.toggle('d_none');
     document.getElementById('pause_btn').classList.toggle('d_none');
 }
 
+/**
+ * @description Stops the game and shows the lost screen.
+ * @returns {void}
+ */
 function lostGame(){
     stopGameByIntervals();
     cancelAnimationFrame(world.animationFrame);
@@ -75,6 +100,10 @@ function lostGame(){
     document.getElementById('canvas').classList.toggle('canvas_fullsreen_bg');
 }
 
+/**
+ * @description Stops the game and shows the won screen.
+ * @returns {void}
+ */
 function wonGame(){
     stopGameByIntervals();
     cancelAnimationFrame(world.animationFrame);
@@ -85,6 +114,11 @@ function wonGame(){
     document.getElementById('canvas').classList.toggle('canvas_fullsreen_bg');
 }
 
+/** 
+ * @description Pauses or resumes the game based on the current state.
+ * Toggles the visibility of the pause and run game buttons.
+ * @returns {void}
+ */
 function pauseGame(){
     if(!isPaused ){
         pauseInterval();
@@ -97,6 +131,10 @@ function pauseGame(){
     document.getElementById('run_game').classList.toggle('d_none');
 }
 
+/**
+ * @description Toggles the visibility of the info game description.
+ * @returns {void}
+ */
 function infoGame(){
     if(!isPaused && !leaveInfoWindow){
         pauseGame();
@@ -108,11 +146,19 @@ function infoGame(){
     document.getElementById('info_game_description').classList.toggle('d_none');
 }
 
+/**
+ * @description Toggles the fullscreen mode of the game.
+ * @returns {void}
+ */
 function toggleFullscreenByUser(){
     toggeledFullscreenByUser = true;
     fullscreenToggle();
 }
 
+/**
+ * @description Toggles the fullscreen mode of the game.
+ * @returns {void}
+ */
 function fullscreenToggle(){
     toggleElementsForFullscreen();
 
@@ -127,6 +173,10 @@ function fullscreenToggle(){
     }
 }
 
+/**
+ * @description Toggles the according elements for fullscreen.
+ * @returns {void}
+ */
 function toggleElementsForFullscreen(){
     document.getElementById('canvas').classList.toggle('canvas_fullsreen');
     document.getElementById('fullscreen_btn').classList.toggle('fullscreen_btn_fullscreen_mode');
@@ -138,54 +188,60 @@ function toggleElementsForFullscreen(){
     document.getElementById('fullscreen_off').classList.toggle('d_none');
 }
 
-window.addEventListener('keydown', (event) => {
-    if(event.keyCode == 39) {
-        keyboard.RIGHT = true;
-    }
+/**
+ * @description Monitors keyboard input for game controls.  
+ * @returns {void}
+ */
+function monitorInputKeys(){
+    window.addEventListener('keydown', (event) => {
+        if(event.keyCode == 39) {
+            keyboard.RIGHT = true;
+        }
 
-    if(event.keyCode == 37) {
-        keyboard.LEFT = true;
-    }
+        if(event.keyCode == 37) {
+            keyboard.LEFT = true;
+        }
 
-    if(event.keyCode == 38) {
-        keyboard.UP = true;
-    }
+        if(event.keyCode == 38) {
+            keyboard.UP = true;
+        }
 
-    if(event.keyCode == 40) {
-        keyboard.DOWN = true;
-    }
-    
-    if(event.keyCode == 32) {
-        keyboard.SPACE = true;
-    }
+        if(event.keyCode == 40) {
+            keyboard.DOWN = true;
+        }
+        
+        if(event.keyCode == 32) {
+            keyboard.SPACE = true;
+        }
 
-    if(event.keyCode == 68){
-        keyboard.D = true;
-    }
-})
+        if(event.keyCode == 68){
+            keyboard.D = true;
+        }
+    })
 
-window.addEventListener('keyup', (event) => {
-    if(event.keyCode == 39) {
-        keyboard.RIGHT = false;
-    }
+    window.addEventListener('keyup', (event) => {
+        if(event.keyCode == 39) {
+            keyboard.RIGHT = false;
+        }
 
-    if(event.keyCode == 37) {
-        keyboard.LEFT = false;
-    }
+        if(event.keyCode == 37) {
+            keyboard.LEFT = false;
+        }
 
-    if(event.keyCode == 38) {
-        keyboard.UP = false;
-    }
+        if(event.keyCode == 38) {
+            keyboard.UP = false;
+        }
 
-    if(event.keyCode == 40) {
-        keyboard.DOWN = false;
-    }
-    
-    if(event.keyCode == 32) {
-        keyboard.SPACE = false;
-    }
+        if(event.keyCode == 40) {
+            keyboard.DOWN = false;
+        }
+        
+        if(event.keyCode == 32) {
+            keyboard.SPACE = false;
+        }
 
-    if(event.keyCode == 68){
-        keyboard.D = false;
-    }
-})
+        if(event.keyCode == 68){
+            keyboard.D = false;
+        }
+    })
+}
