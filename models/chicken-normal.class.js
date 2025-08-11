@@ -35,7 +35,6 @@ class ChickenNormal extends CollidableObject {
         this.speed = 0.15 + Math.random() * 0.25
   
         this.animate();
-        this.setLastY();
     }
 
     /**

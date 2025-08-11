@@ -37,7 +37,6 @@ class ChickenSmall extends CollidableObject {
   
         this.applyGravity();
         this.animate();
-        this.setLastY();
     }
 
     /**
