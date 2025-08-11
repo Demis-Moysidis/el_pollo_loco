@@ -14,23 +14,6 @@ class BackgroundObject extends MovableObject {
         this.y = 480 - this.height;
         this.x = x;
         this.layer = layer;
-        this.animate();
-    }
-
-    /**
-     * Sets up the animation for the background object.
-     * @returns {void}
-     */
-    animate(){
-        setStoppableInterval(() => {
-            if(this.world && !this.world.character.deathRegistered && this.world.endbossHealth){
-                if(this.world.character.isAttackedByEndboss()){   
-                    this.checkWhichLeyerHasToMove();
-                }else{       
-                    this.moveCorrespondingLayer();
-                }    
-            }
-        }, 1000 / 60 )
     }
 
     /**

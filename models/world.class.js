@@ -59,6 +59,7 @@ class World {
             this.checkEndbossDead();
             this.checkIfAllBottlesAreThrowen();
             this.checkIfCharacterIsDead();
+            this.checkIfBackgroundImagesHaveToMove();
         }, 1000 / 60)
     }
 
@@ -190,7 +191,7 @@ class World {
     checkIfCharacterCollidingWithEnemies(){
         this.level.enemies.forEach( (enemy) => {
             if(this.character.isColliding(enemy) && !enemy.isDead() && !this.character.isDead()){
-                if(this.checkIfCollisionWasJumpAttackFromCharacter() && this.character.isAboveGround()){
+                if(this.checkIfCollisionWasJumpAttackFromCharacter() && this.character.isAboveGround() && !(enemy instanceof Endboss)){
                     enemy.hit(100);
                     this.character.jump(-5, 2);
                     setStoppableSound(enemy.hitChickenSound, 0.05);
@@ -368,5 +369,21 @@ class World {
     flipImageBack(movableObject) {
         movableObject.x = movableObject.x * -1;
         this.ctx.restore();
+    }
+
+    /**
+     * Checks if background images need to move based on character and endboss interactions.
+     * @returns {void}
+     */
+    checkIfBackgroundImagesHaveToMove(){
+        this.level.backgroundObjects.forEach((bg) => {
+            if(!this.character.deathRegistered && this.endbossHealth){
+                if(this.character.isAttackedByEndboss()){   
+                    bg.checkWhichLeyerHasToMove();
+                }else{       
+                    bg.moveCorrespondingLayer();
+                }    
+            }
+        })
     }
 }
