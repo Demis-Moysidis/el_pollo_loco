@@ -190,7 +190,7 @@ class World {
     checkIfCharacterCollidingWithEnemies(){
         this.level.enemies.forEach( (enemy) => {
             if(this.character.isColliding(enemy) && !enemy.isDead() && !this.character.isDead()){
-                if(this.checkIfCollisionWasJumpAttackFromCharacter(enemy) && this.character.isAboveGround()){
+                if(this.checkIfCollisionWasJumpAttackFromCharacter() && this.character.isAboveGround()){
                     enemy.hit(100);
                     this.character.jump(-5, 2);
                     setStoppableSound(enemy.hitChickenSound, 0.05);
@@ -262,11 +262,10 @@ class World {
 
     /**
      * Checks if the collision was a jump attack from the character.
-     * @param {CollidableObject} enemy - The enemy object to check against.
      * @returns {boolean} - True if the collision was a jump attack, false otherwise.
      */
-    checkIfCollisionWasJumpAttackFromCharacter(enemy){
-        return enemy.y + enemy.offset.top >= this.character.lastY + this.character.height - this.character.offset.bottom
+    checkIfCollisionWasJumpAttackFromCharacter(){
+        return this.character.speedY > 0
     }
 
     /**
